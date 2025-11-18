@@ -10,9 +10,9 @@
       },
       "JunitXml.TestLogger": {
         "type": "Direct",
-        "requested": "[3.0.134, )",
-        "resolved": "3.0.134",
-        "contentHash": "KoZInijT7rUEXGEOGUQfzLBZFaA65A7g6AhosHCI/aPuqxYMq40wUOO3kynor8QQhbgU+lpLFmhAxNb3+JoCfQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "f6swYzT8DOVS6byaz1f7SYT06aoZTFXooLlJFX9Da3JB1/RLK+Z0UW1Q33NqMX+T9JFpal276qAJfPVUp96qbg=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
@@ -27,6 +27,15 @@
         "contentHash": "kt/PKBZ91rFCWxVIJZSgVLk+YR+4KxTuHf799ho8WNiK5ZQpJNAEZCAWX86vcKrs+DiYjiibpYKdGZP6+/N17w==",
         "dependencies": {
           "Microsoft.CodeCoverage": "17.12.0"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net462": "1.0.3"
         }
       },
       "Microsoft.TestPlatform.ObjectModel": {
@@ -124,6 +133,11 @@
         "type": "Transitive",
         "resolved": "17.12.0",
         "contentHash": "4svMznBd5JM21JIG2xZKGNanAHNXplxf/kQDFfLHXQ3OnpJkayRK/TjacFjA+EYmoyuNXHo/sOETEfcYtAzIrA=="
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net462": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "IzAV30z22ESCeQfxP29oVf4qEo8fBGXLXSU6oacv/9Iqe6PzgHDKCaWfwMBak7bSJQM0F5boXWoZS+kChztRIQ=="
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -271,9 +285,9 @@
       },
       "JunitXml.TestLogger": {
         "type": "Direct",
-        "requested": "[3.0.134, )",
-        "resolved": "3.0.134",
-        "contentHash": "KoZInijT7rUEXGEOGUQfzLBZFaA65A7g6AhosHCI/aPuqxYMq40wUOO3kynor8QQhbgU+lpLFmhAxNb3+JoCfQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "f6swYzT8DOVS6byaz1f7SYT06aoZTFXooLlJFX9Da3JB1/RLK+Z0UW1Q33NqMX+T9JFpal276qAJfPVUp96qbg=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
@@ -288,6 +302,15 @@
         "contentHash": "kt/PKBZ91rFCWxVIJZSgVLk+YR+4KxTuHf799ho8WNiK5ZQpJNAEZCAWX86vcKrs+DiYjiibpYKdGZP6+/N17w==",
         "dependencies": {
           "Microsoft.CodeCoverage": "17.12.0"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net472": "1.0.3"
         }
       },
       "Microsoft.TestPlatform.ObjectModel": {
@@ -385,6 +408,11 @@
         "type": "Transitive",
         "resolved": "17.12.0",
         "contentHash": "4svMznBd5JM21JIG2xZKGNanAHNXplxf/kQDFfLHXQ3OnpJkayRK/TjacFjA+EYmoyuNXHo/sOETEfcYtAzIrA=="
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net472": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "0E7evZXHXaDYYiLRfpyXvCh+yzM2rNTyuZDI+ZO7UUqSc6GfjePiXTdqJGtgIKUwdI81tzQKmaWprnUiPj9hAw=="
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -532,9 +560,9 @@
       },
       "JunitXml.TestLogger": {
         "type": "Direct",
-        "requested": "[3.0.134, )",
-        "resolved": "3.0.134",
-        "contentHash": "KoZInijT7rUEXGEOGUQfzLBZFaA65A7g6AhosHCI/aPuqxYMq40wUOO3kynor8QQhbgU+lpLFmhAxNb3+JoCfQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "f6swYzT8DOVS6byaz1f7SYT06aoZTFXooLlJFX9Da3JB1/RLK+Z0UW1Q33NqMX+T9JFpal276qAJfPVUp96qbg=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
@@ -549,6 +577,15 @@
         "contentHash": "kt/PKBZ91rFCWxVIJZSgVLk+YR+4KxTuHf799ho8WNiK5ZQpJNAEZCAWX86vcKrs+DiYjiibpYKdGZP6+/N17w==",
         "dependencies": {
           "Microsoft.CodeCoverage": "17.12.0"
+        }
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "vUc9Npcs14QsyOD01tnv/m8sQUnGTGOw1BCmKcv77LBJY7OxhJ+zJF7UD/sCL3lYNFuqmQEVlkfS4Quif6FyYg==",
+        "dependencies": {
+          "Microsoft.NETFramework.ReferenceAssemblies.net48": "1.0.3"
         }
       },
       "Microsoft.TestPlatform.ObjectModel": {
@@ -646,6 +683,11 @@
         "type": "Transitive",
         "resolved": "17.12.0",
         "contentHash": "4svMznBd5JM21JIG2xZKGNanAHNXplxf/kQDFfLHXQ3OnpJkayRK/TjacFjA+EYmoyuNXHo/sOETEfcYtAzIrA=="
+      },
+      "Microsoft.NETFramework.ReferenceAssemblies.net48": {
+        "type": "Transitive",
+        "resolved": "1.0.3",
+        "contentHash": "zMk4D+9zyiEWByyQ7oPImPN/Jhpj166Ky0Nlla4eXlNL8hI/BtSJsgR8Inldd4NNpIAH3oh8yym0W2DrhXdSLQ=="
       },
       "System.Buffers": {
         "type": "Transitive",
@@ -793,9 +835,9 @@
       },
       "JunitXml.TestLogger": {
         "type": "Direct",
-        "requested": "[3.0.134, )",
-        "resolved": "3.0.134",
-        "contentHash": "KoZInijT7rUEXGEOGUQfzLBZFaA65A7g6AhosHCI/aPuqxYMq40wUOO3kynor8QQhbgU+lpLFmhAxNb3+JoCfQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "f6swYzT8DOVS6byaz1f7SYT06aoZTFXooLlJFX9Da3JB1/RLK+Z0UW1Q33NqMX+T9JFpal276qAJfPVUp96qbg=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
@@ -999,9 +1041,9 @@
       },
       "JunitXml.TestLogger": {
         "type": "Direct",
-        "requested": "[3.0.134, )",
-        "resolved": "3.0.134",
-        "contentHash": "KoZInijT7rUEXGEOGUQfzLBZFaA65A7g6AhosHCI/aPuqxYMq40wUOO3kynor8QQhbgU+lpLFmhAxNb3+JoCfQ=="
+        "requested": "[7.0.2, )",
+        "resolved": "7.0.2",
+        "contentHash": "f6swYzT8DOVS6byaz1f7SYT06aoZTFXooLlJFX9Da3JB1/RLK+Z0UW1Q33NqMX+T9JFpal276qAJfPVUp96qbg=="
       },
       "Microsoft.CodeAnalysis.NetAnalyzers": {
         "type": "Direct",
