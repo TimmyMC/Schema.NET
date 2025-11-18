@@ -13,7 +13,7 @@ public static partial class SourceUtility
 
     public static string Render(string value, int indent = 0)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(value);
 #else
         if (value is null)
@@ -40,7 +40,7 @@ public static partial class SourceUtility
     public static string RenderItems<T>(IReadOnlyCollection<T> items, Func<int, int, T, string> action, int indent = 0,
         SourceDelimeter sourceDelimeter = SourceDelimeter.None)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(items);
         ArgumentNullException.ThrowIfNull(action);
 #else

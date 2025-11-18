@@ -13,7 +13,7 @@ public class ContextJsonConverter : JsonConverter<JsonLdContext>
     /// <inheritdoc />
     public override JsonLdContext Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
         ArgumentNullException.ThrowIfNull(options);
 #else
@@ -82,7 +82,7 @@ public class ContextJsonConverter : JsonConverter<JsonLdContext>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, JsonLdContext value, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(options);

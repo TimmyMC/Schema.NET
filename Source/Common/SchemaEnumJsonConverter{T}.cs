@@ -41,7 +41,7 @@ public class SchemaEnumJsonConverter<T> : JsonConverter<T>
     /// <returns>The enumeration value.</returns>
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
 #else
         if (typeToConvert is null)
@@ -67,7 +67,7 @@ public class SchemaEnumJsonConverter<T> : JsonConverter<T>
     /// <param name="options">The JSON serializer options.</param>
     public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(options);
 #else

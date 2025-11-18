@@ -30,7 +30,7 @@ public readonly struct OneOrMany<T>
         }
         else
         {
-            this.collection = new[] { item };
+            this.collection = [item];
             this.HasOne = true;
         }
     }
