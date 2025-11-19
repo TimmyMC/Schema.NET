@@ -46,34 +46,34 @@ jobs:
       - name: "Dotnet Cake Test"
         run: dotnet cake --target=Test
         shell: pwsh
-      - name: "Dotnet Cake Pack"
-        run: dotnet cake --target=Pack
-        shell: pwsh
-      - name: "Publish Artefacts"
-        uses: actions/upload-artifact@v5.0.0
-        if: always()
-        with:
-          name: ${{matrix.os}}
-          path: "./Artefacts"
+#      - name: "Dotnet Cake Pack"
+#        run: dotnet cake --target=Pack
+#        shell: pwsh
+#      - name: "Publish Artefacts"
+#        uses: actions/upload-artifact@v5.0.0
+#        if: always()
+#        with:
+#          name: ${{matrix.os}}
+#          path: "./Artefacts"
 
-  publish-test-results:
-    name: "Publish Tests Results"
-    needs: build
-    if: always()
-    permissions:
-      checks: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Download Artefact"
-        uses: actions/download-artifact@v6.0.0
-        with:
-          path: "./Artefacts"
-      - name: "Publish Test Summary"
-        uses: test-summary/action@v2
-        if: always()
-        with:
-          paths: "./Artefacts/*/*.xml"
+#  publish-test-results:
+#    name: "Publish Tests Results"
+#    needs: build
+#    if: always()
+#    permissions:
+#      checks: write
+#      pull-requests: write
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: "Download Artefact"
+#        uses: actions/download-artifact@v6.0.0
+#        with:
+#          path: "./Artefacts"
+#      - name: "Publish Test Summary"
+#        uses: test-summary/action@v2
+#        if: always()
+#        with:
+#          paths: "./Artefacts/*/*.xml"
 #
 #  push-github-packages:
 #    name: "Push GitHub Packages"
