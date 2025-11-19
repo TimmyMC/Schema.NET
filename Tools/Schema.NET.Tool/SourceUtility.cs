@@ -105,7 +105,7 @@ public static partial class SourceUtility
         return element.InnerXml;
     }
 
-#if NET8_0_OR_GREATER
+#if NET
     [GeneratedRegex("[\n ]{0,}\n[\n ]{0,}", RegexOptions.Compiled)]
     private static partial Regex NewLineReplace();
 
