@@ -9,7 +9,7 @@ public class AddNumberTypeToMediaObjectHeightAndWidth : IClassOverride
 {
     public bool CanOverride(GeneratorSchemaClass c)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(c);
 #else
         if (c is null)
@@ -24,7 +24,7 @@ public class AddNumberTypeToMediaObjectHeightAndWidth : IClassOverride
 
     public void Override(GeneratorSchemaClass c)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(c);
 #else
         if (c is null)

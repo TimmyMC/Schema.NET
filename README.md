@@ -1,5 +1,3 @@
-![Schema.NET Banner](https://github.com/RehanSaeed/Schema.NET/blob/main/Images/Banner.png)
-
 [![Schema.NET NuGet Package](https://img.shields.io/nuget/v/Schema.NET.svg)](https://www.nuget.org/packages/Schema.NET) [![Schema.NET Azure Artifacts Package](https://feeds.dev.azure.com/schema-net/_apis/public/Packaging/Feeds/64e69c35-cb00-46e4-9cba-6d8faf1f41d6/Packages/fa72270b-6c54-4403-9307-aa826e43530e/Badge)](https://dev.azure.com/schema-net/Schema.NET/_packaging?_a=package&feed=64e69c35-cb00-46e4-9cba-6d8faf1f41d6&package=fa72270b-6c54-4403-9307-aa826e43530e&preferRelease=true) [![Schema.NET NuGet Package Downloads](https://img.shields.io/nuget/dt/Schema.NET)](https://www.nuget.org/packages/Schema.NET) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
 
 Schema.org objects turned into strongly typed C# POCO classes for use in .NET. All classes can be serialized into JSON/JSON-LD and XML, typically used to represent structured data in the `head` section of `html` page.
@@ -39,8 +37,6 @@ If writing the result into a `<script>` element, be sure to use the `.ToHtmlEsca
 #### Websites
 
 Websites can define Structured Data in the `head` section of their `html` to enable search engines to show richer information in their search results. Here is an example of how [Google](https://developers.google.com/search/docs/guides/intro-structured-data) can display extended metadata about your site in it's search results.
-
-![Google Logo Structured Data Example](https://github.com/RehanSaeed/Schema.NET/blob/main/Images/Google%20Logo%20Structured%20Data%20Example.png)
 
 Using structured data in `html` requires the use of a `script` tag with a MIME type of `application/ld+json` like so:
 
@@ -162,12 +158,12 @@ There are many pending types on [schema.org](https://schema.org) which are not y
 | Azure Pipelines | Mac                   | [![Azure Pipelines Mac Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
 | Azure Pipelines | Windows               | [![Azure Pipelines Windows Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
 | Azure Pipelines | Overall               | [![Azure Pipelines Overall Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) | [![Azure DevOps Build History](https://buildstats.info/azurepipelines/chart/schema-net/Schema.NET/1?branch=main&includeBuildsFromPullRequest=false)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
-| GitHub Actions  | Ubuntu, Mac & Windows | [![GitHub Actions Status](https://github.com/RehanSaeed/Schema.NET/workflows/Build/badge.svg?branch=main)](https://github.com/RehanSaeed/Schema.NET/actions) | [![GitHub Actions Build History](https://buildstats.info/github/chart/RehanSaeed/Schema.NET?branch=main&includeBuildsFromPullRequest=false)](https://github.com/RehanSaeed/Schema.NET/actions) |
+| GitHub Actions  | Ubuntu, Mac & Windows | [![GitHub Actions Status](https://github.com/TimmyMC/Schema.NET/workflows/Build/badge.svg?branch=main)](https://github.com/TimmyMC/Schema.NET/actions) | [![GitHub Actions Build History](https://buildstats.info/github/chart/RehanSaeed/Schema.NET?branch=main&includeBuildsFromPullRequest=false)](https://github.com/TimmyMC/Schema.NET/actions) |
 | AppVeyor        | Ubuntu, Mac & Windows | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/djxrpkw8ckyf24c1/branch/main?svg=true)](https://ci.appveyor.com/project/RehanSaeed/schema-net/branch/main) | [![AppVeyor Build History](https://buildstats.info/appveyor/chart/RehanSaeed/schema-net?branch=main&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/schema-net) |
 
 ## Contributions and Thanks
 
-Please view the [contributing guide](https://github.com/RehanSaeed/Schema.NET/blob/main/.github/CONTRIBUTING.md) for more information.
+Please view the [contributing guide](https://github.com/TimmyMC/Schema.NET/blob/main/.github/CONTRIBUTING.md) for more information.
 
 - [kirkone](https://github.com/kirkone) - CI reads .NET Core version from new global.json file.
 - [Turnerj](https://github.com/Turnerj) - Added `System.Text.Json` support, Had all types implement `IEquatable<T>` `GetHashCode` and added extra unit tests and bug fixes.

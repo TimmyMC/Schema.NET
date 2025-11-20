@@ -62,6 +62,7 @@ Task("Test")
                 project.ToString(),
                 new DotNetTestSettings()
                 {
+                    Framework = "net8.0",
                     Blame = true,
                     Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
                     Configuration = configuration,

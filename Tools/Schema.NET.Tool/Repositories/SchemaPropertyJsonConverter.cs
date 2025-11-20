@@ -12,7 +12,7 @@ public class SchemaPropertyJsonConverter : JsonConverter<List<SchemaObject>>
 {
     public override List<SchemaObject> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
 #else
         if (typeToConvert is null)
