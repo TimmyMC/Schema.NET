@@ -23,7 +23,7 @@ public static class EnumHelper
         [NotNullWhen(true)]
 #endif
         string? value,
-#if NET6_0_OR_GREATER
+#if NET
         out object? result) =>
         Enum.TryParse(enumType, value, out result);
 #else
@@ -59,7 +59,7 @@ public static class EnumHelper
         string? value,
         out object? result)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(enumType);
 #else
         if (enumType is null)

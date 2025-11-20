@@ -8,7 +8,7 @@ public static class EnumerableExtensions
 {
     public static IEnumerable<T> Traverse<T>(T node, Func<T, T> parent)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(parent);
 #else
         if (parent is null)
@@ -25,7 +25,7 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Traverse<T>(T node, Func<T, IEnumerable<T>> children)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(children);
 #else
         if (children is null)

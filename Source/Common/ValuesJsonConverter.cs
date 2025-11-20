@@ -42,7 +42,7 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <returns>The object value.</returns>
     public override IValues? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
         ArgumentNullException.ThrowIfNull(options);
 #else
@@ -100,7 +100,7 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <param name="options">The JSON serializer options.</param>
     public override void Write(Utf8JsonWriter writer, IValues value, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(options);
@@ -146,7 +146,7 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <param name="options">The JSON serializer options.</param>
     public virtual void WriteObject(Utf8JsonWriter writer, object? value, JsonSerializerOptions options)
     {
-#if NET6_0_OR_GREATER
+#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(options);
 #else

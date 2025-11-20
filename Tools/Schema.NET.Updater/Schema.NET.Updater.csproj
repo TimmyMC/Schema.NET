@@ -28,4 +28,10 @@
     </AssemblyAttribute>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Update="MinVer" Version="6.0.0" />
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
+    <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" />
+  </ItemGroup>
+
 </Project>

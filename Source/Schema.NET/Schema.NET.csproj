@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup Label="Build">
-    <TargetFrameworks>net8.0;net6.0;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
     <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
     <IncludePendingSchemaObjects>False</IncludePendingSchemaObjects>
@@ -14,18 +14,17 @@
   </PropertyGroup>
 
   <ItemGroup Label="Package References (.NET 8)" Condition="'$(TargetFramework)' == 'net8.0'">
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
-  </ItemGroup>
-
-  <ItemGroup Label="Package References (.NET 6)" Condition="'$(TargetFramework)' == 'net6.0'">
-    <PackageReference Include="System.Text.Json" Version="6.0.11" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.9.2" />
+    <PackageReference Include="System.Text.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
+    <PackageReference Update="MinVer" Version="6.0.0" />
+    <PackageReference Update="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" />
+    <PackageReference Update="DotNet.ReproducibleBuilds" Version="1.2.39" />
+    <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.100" />
   </ItemGroup>
 
   <ItemGroup Label="Package References (netstandard 2.0)" Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="System.Text.Json" Version="6.0.11" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.5.0" />
+    <PackageReference Include="System.Text.Json" Version="10.0.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" />
   </ItemGroup>
 
   <ItemGroup Label="Package References">

@@ -6,4 +6,4 @@ This project supports only the latest version with security updates. However, we
 
 ## Reporting a Vulnerability
 
-Contact [Muhammad Rehan Saeed](https://github.com/RehanSaeed) to report a security vulnerability. You will be thanked!
+Contact [Timmy Christensen](https://github.com/TimmyMC) to report a security vulnerability. You will be thanked!
