@@ -13,17 +13,16 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
-    <Authors>Muhammad Rehan Saeed (RehanSaeed.com)</Authors>
-    <Company>Muhammad Rehan Saeed (RehanSaeed.com)</Company>
-    <Copyright>Copyright © Muhammad Rehan Saeed. All rights Reserved</Copyright>
+    <Authors>Muhammad Rehan Saeed, Timmy Christensen</Authors>
+    <Copyright>Copyright © 2017-2025 Muhammad Rehan Saeed. Copyright © 2025 Timmy Christensen. All rights Reserved</Copyright>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/RehanSaeed/Schema.NET</PackageProjectUrl>
-    <PackageIcon>Icon.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/TimmyMC/Schema.NET</PackageProjectUrl>
+<!--    <PackageIcon>Icon.png</PackageIcon>-->
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/RehanSaeed/Schema.NET.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/TimmyMC/Schema.NET.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/RehanSaeed/Schema.NET/releases</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/TimmyMC/Schema.NET/releases</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
