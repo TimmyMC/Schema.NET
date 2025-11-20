@@ -46,73 +46,73 @@ jobs:
       - name: "Dotnet Cake Test"
         run: dotnet cake --target=Test
         shell: pwsh
-#      - name: "Dotnet Cake Pack"
-#        run: dotnet cake --target=Pack
-#        shell: pwsh
-#      - name: "Publish Artefacts"
-#        uses: actions/upload-artifact@v5.0.0
-#        if: always()
-#        with:
-#          name: ${{matrix.os}}
-#          path: "./Artefacts"
+      - name: "Dotnet Cake Pack"
+        run: dotnet cake --target=Pack
+        shell: pwsh
+      - name: "Publish Artefacts"
+        uses: actions/upload-artifact@v5.0.0
+        if: always()
+        with:
+          name: ${{matrix.os}}
+          path: "./Artefacts"
 
-#  publish-test-results:
-#    name: "Publish Tests Results"
-#    needs: build
-#    if: always()
-#    permissions:
-#      checks: write
-#      pull-requests: write
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: "Download Artefact"
-#        uses: actions/download-artifact@v6.0.0
-#        with:
-#          path: "./Artefacts"
-#      - name: "Publish Test Summary"
-#        uses: test-summary/action@v2
-#        if: always()
-#        with:
-#          paths: "./Artefacts/*/*.xml"
-#
-#  push-github-packages:
-#    name: "Push GitHub Packages"
-#    needs: build
-#    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
-#    environment:
-#      name: "GitHub Packages"
-#      url: https://github.com/RehanSaeed/Schema.NET/packages
-#    permissions:
-#      packages: write
-#    runs-on: windows-latest
-#    steps:
-#      - name: "Download Artefact"
-#        uses: actions/download-artifact@v6.0.0
-#        with:
-#          name: "windows-latest"
-#      - name: "Dotnet NuGet Add Source"
-#        run: dotnet nuget add source https://nuget.pkg.github.com/RehanSaeed/index.json --name GitHub --username RehanSaeed --password ${{secrets.GITHUB_TOKEN}}
-#        shell: pwsh
-#      - name: "Dotnet NuGet Push"
-#        run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
-#        shell: pwsh
-#
-#  push-nuget:
-#    name: "Push NuGet Packages"
-#    needs: build
-#    if: github.event_name == 'release'
-#    environment:
-#      name: "NuGet"
-#      url: https://www.nuget.org/packages/Schema.NET
-#    runs-on: windows-latest
-#    steps:
-#      - name: "Download Artefact"
-#        uses: actions/download-artifact@v6.0.0
-#        with:
-#          name: "windows-latest"
-#      - name: "Dotnet NuGet Push"
-#        run: |
-#          Get-ChildItem .\ -Filter *.nupkg |
-#          Where-Object { !$_.Name.Contains('preview') } |
-#          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
-#        shell: pwsh
+  publish-test-results:
+    name: "Publish Tests Results"
+    needs: build
+    if: always()
+    permissions:
+      checks: write
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Download Artefact"
+        uses: actions/download-artifact@v6.0.0
+        with:
+          path: "./Artefacts"
+      - name: "Publish Test Summary"
+        uses: test-summary/action@v2
+        if: always()
+        with:
+          paths: "./Artefacts/*/*.xml"
+
+  push-github-packages:
+    name: "Push GitHub Packages"
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.event_name == 'release'
+    environment:
+      name: "GitHub Packages"
+      url: https://github.com/TimmyMC/Schema.NET/packages
+    permissions:
+      packages: write
+    runs-on: windows-latest
+    steps:
+      - name: "Download Artefact"
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: "windows-latest"
+      - name: "Dotnet NuGet Add Source"
+        run: dotnet nuget add source https://nuget.pkg.github.com/TimmyMC/index.json --name GitHub --username TimmyMC --password ${{secrets.GITHUB_TOKEN}}
+        shell: pwsh
+      - name: "Dotnet NuGet Push"
+        run: dotnet nuget push .\*.nupkg --api-key ${{ github.token }} --source GitHub --skip-duplicate
+        shell: pwsh
+
+  push-nuget:
+    name: "Push NuGet Packages"
+    needs: build
+    if: github.event_name == 'release'
+    environment:
+      name: "NuGet"
+      url: https://www.nuget.org/packages/Schema.NET
+    runs-on: windows-latest
+    steps:
+      - name: "Download Artefact"
+        uses: actions/download-artifact@v6.0.0
+        with:
+          name: "windows-latest"
+      - name: "Dotnet NuGet Push"
+        run: |
+          Get-ChildItem .\ -Filter *.nupkg |
+          Where-Object { !$_.Name.Contains('preview') } |
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+        shell: pwsh
