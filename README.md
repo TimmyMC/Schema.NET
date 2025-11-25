@@ -1,4 +1,6 @@
-[![Schema.NET NuGet Package](https://img.shields.io/nuget/v/Schema.NET.svg)](https://www.nuget.org/packages/Schema.NET) [![Schema.NET Azure Artifacts Package](https://feeds.dev.azure.com/schema-net/_apis/public/Packaging/Feeds/64e69c35-cb00-46e4-9cba-6d8faf1f41d6/Packages/fa72270b-6c54-4403-9307-aa826e43530e/Badge)](https://dev.azure.com/schema-net/Schema.NET/_packaging?_a=package&feed=64e69c35-cb00-46e4-9cba-6d8faf1f41d6&package=fa72270b-6c54-4403-9307-aa826e43530e&preferRelease=true) [![Schema.NET NuGet Package Downloads](https://img.shields.io/nuget/dt/Schema.NET)](https://www.nuget.org/packages/Schema.NET) [![Twitter URL](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/RehanSaeedUK) [![Twitter Follow](https://img.shields.io/twitter/follow/rehansaeeduk.svg?style=social&label=Follow)](https://twitter.com/RehanSaeedUK)
+[![Schema.NET NuGet Package](https://img.shields.io/nuget/v/Schema.NET.svg)](https://www.nuget.org/packages/Schema.NET)
+
+[//]: # ([![Schema.NET NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET&#41;]&#40;https://www.nuget.org/packages/Schema.NET&#41;)
 
 Schema.org objects turned into strongly typed C# POCO classes for use in .NET. All classes can be serialized into JSON/JSON-LD and XML, typically used to represent structured data in the `head` section of `html` page.
 
@@ -148,31 +150,12 @@ For more examples and actual running code samples, take a look at the unit tests
 
 There are many pending types on [schema.org](https://schema.org) which are not yet fully formed and ready for production. If you need to use these, you can install the [Schema.NET.Pending](https://www.nuget.org/packages/Schema.NET.Pending) NuGet package instead of [Schema.NET](https://www.nuget.org/packages/Schema.NET). This package contains all released schema types as well as all pending types.
 
-[![Schema.NET.Pending NuGet Package](https://img.shields.io/nuget/v/Schema.NET.Pending.svg)](https://www.nuget.org/packages/Schema.NET.Pending) [![Schema.NET.Pending Azure Artifacts Package](https://feeds.dev.azure.com/schema-net/_apis/public/Packaging/Feeds/64e69c35-cb00-46e4-9cba-6d8faf1f41d6/Packages/3f7ed124-c136-4be6-8972-3a6b612b932e/Badge)](https://dev.azure.com/schema-net/Schema.NET/_packaging?_a=package&feed=64e69c35-cb00-46e4-9cba-6d8faf1f41d6&package=3f7ed124-c136-4be6-8972-3a6b612b932e&preferRelease=true) [![Schema.NET.Pending NuGet Package Downloads](https://img.shields.io/nuget/dt/Schema.NET.Pending)](https://www.nuget.org/packages/Schema.NET.Pending)
+[![Schema.NET.Pending NuGet Package](https://img.shields.io/nuget/v/Schema.NET.Pending.svg)](https://www.nuget.org/packages/Schema.NET.Pending) 
+
+[//]: # ([![Schema.NET.Pending NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET.Pending&#41;]&#40;https://www.nuget.org/packages/Schema.NET.Pending&#41;)
 
 ## Continuous Integration
 
-| Name            | Operating System      | Status | History |
-| :---            | :---                  | :---   | :---    |
-| Azure Pipelines | Ubuntu                | [![Azure Pipelines Ubuntu Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main&stageName=Build&jobName=Build&configuration=Build%20Linux)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
-| Azure Pipelines | Mac                   | [![Azure Pipelines Mac Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main&stageName=Build&jobName=Build&configuration=Build%20Mac)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
-| Azure Pipelines | Windows               | [![Azure Pipelines Windows Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main&stageName=Build&jobName=Build&configuration=Build%20Windows)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
-| Azure Pipelines | Overall               | [![Azure Pipelines Overall Build Status](https://dev.azure.com/schema-net/Schema.NET/_apis/build/status/Schema.NET?branchName=main)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) | [![Azure DevOps Build History](https://buildstats.info/azurepipelines/chart/schema-net/Schema.NET/1?branch=main&includeBuildsFromPullRequest=false)](https://dev.azure.com/schema-net/Schema.NET/_build/latest?definitionId=1&branchName=main) |
-| GitHub Actions  | Ubuntu, Mac & Windows | [![GitHub Actions Status](https://github.com/TimmyMC/Schema.NET/workflows/Build/badge.svg?branch=main)](https://github.com/TimmyMC/Schema.NET/actions) | [![GitHub Actions Build History](https://buildstats.info/github/chart/RehanSaeed/Schema.NET?branch=main&includeBuildsFromPullRequest=false)](https://github.com/TimmyMC/Schema.NET/actions) |
-| AppVeyor        | Ubuntu, Mac & Windows | [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/djxrpkw8ckyf24c1/branch/main?svg=true)](https://ci.appveyor.com/project/RehanSaeed/schema-net/branch/main) | [![AppVeyor Build History](https://buildstats.info/appveyor/chart/RehanSaeed/schema-net?branch=main&includeBuildsFromPullRequest=false)](https://ci.appveyor.com/project/RehanSaeed/schema-net) |
-
-## Contributions and Thanks
-
-Please view the [contributing guide](https://github.com/TimmyMC/Schema.NET/blob/main/.github/CONTRIBUTING.md) for more information.
-
-- [kirkone](https://github.com/kirkone) - CI reads .NET Core version from new global.json file.
-- [Turnerj](https://github.com/Turnerj) - Added `System.Text.Json` support, Had all types implement `IEquatable<T>` `GetHashCode` and added extra unit tests and bug fixes.
-- [shervinw](https://github.com/shervinw) - Added better null value handling for structs.
-- [kirk-marple](https://github.com/kirk-marple) - Refactoring JSON serialization to be more efficient.
-- [nickevansuk](https://github.com/nickevansuk) - Adding better null value handling and use HTTPS instead of HTTP.
-- [MEmanuelsson](https://github.com/MEmanuelsson) - Added support for the schema.org Date type without time.
-- [halovanic](https://github.com/halovanic) - For adding interfaces to Schema.NET types for greater flexibility.
-- [AndreSteenbergen](https://github.com/AndreSteenbergen) - For enabling the tool to work on linux.
-- [benmccallum](https://github.com/benmccallum) - For adding XSS vlnerability protection.
-- [psampaio](https://github.com/psampaio) - Added deserialization support and unit tests.
-- [icunningham88](https://github.com/icunningham88) - Improved a test.
+| Name            | Operating System      | Status | History                                                                                                                                                                                  |
+| :---            | :---                  | :---   |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub Actions  | Ubuntu, Mac & Windows | [![GitHub Actions Status](https://github.com/TimmyMC/Schema.NET/workflows/Build/badge.svg?branch=main)](https://github.com/TimmyMC/Schema.NET/actions) | [![GitHub Actions Build History](https://buildstats.info/github/chart/TimmyMC/Schema.NET?branch=main&includeBuildsFromPullRequest=false)](https://github.com/TimmyMC/Schema.NET/actions) |

@@ -29,7 +29,7 @@ public readonly struct OneOrMany<T>
     {
         if (item is null || (item is string itemAsString && string.IsNullOrWhiteSpace(itemAsString)))
         {
-            this.collection = [];
+            this.collection = null;
             this.HasOne = false;
         }
         else
@@ -92,7 +92,7 @@ public readonly struct OneOrMany<T>
             }
         }
 
-        this.collection = [];
+        this.collection = null;
         this.HasOne = false;
     }
 

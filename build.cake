@@ -62,7 +62,6 @@ Task("Test")
                 project.ToString(),
                 new DotNetTestSettings()
                 {
-                    Framework = "net8.0",
                     Blame = true,
                     Collectors = new string[] { "Code Coverage", "XPlat Code Coverage" },
                     Configuration = configuration,
@@ -76,9 +75,6 @@ Task("Test")
                     NoRestore = true,
                     ResultsDirectory = artefactsDirectory,
                 });
-            // Workaround the test-summary GitHub Action not being able to handle empty JUnit test result XML files.
-            // https://github.com/test-summary/action/issues/19
-            DeleteFiles($"./**/{project.GetFilenameWithoutExtension()}_NETFramework472.xml");
         });
 
 Task("Pack")
