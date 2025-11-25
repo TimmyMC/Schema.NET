@@ -8,28 +8,20 @@ public class RenameEventProperty : IClassOverride
 {
     public bool CanOverride(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         return c.Properties.Any(x => string.Equals(x.Name, "Event", StringComparison.OrdinalIgnoreCase));
     }
 
     public void Override(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         var eventProperty = c
             .Properties

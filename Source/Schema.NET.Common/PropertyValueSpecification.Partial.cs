@@ -1,6 +1,5 @@
 namespace Schema.NET;
 
-using System.Linq;
 using System.Text;
 
 /// <summary>
@@ -13,14 +12,14 @@ public partial class PropertyValueSpecification
     private const string NamePropertyName = "name=";
     private const string PatternPropertyName = "pattern=";
     private const string RequiredPropertyName = "required";
-    private const char SpaceDelimeter = ' ';
+    private const char SpaceDelimiter = ' ';
 
     /// <summary>
-    /// Returns a <see cref="string" /> that represents the short hand representation of this instance.
+    /// Returns a <see cref="string" /> that represents the shorthand representation of this instance.
     /// See https://schema.org/docs/actions.html#part-3.
     /// </summary>
     /// <returns>
-    /// A <see cref="string" /> that represents the short hand representation of this instance.
+    /// A <see cref="string" /> that represents the shorthand representation of this instance.
     /// </returns>
     public override string ToString()
     {
@@ -34,39 +33,39 @@ public partial class PropertyValueSpecification
 
         if (this.ValueMinLength.First() is double minLength)
         {
-            AppendSpaceDelimeter(stringBuilder);
+            AppendSpaceDelimiter(stringBuilder);
             stringBuilder.Append(MinLengthPropertyName);
             stringBuilder.Append(minLength);
         }
 
         if (this.ValueName.First() is string name)
         {
-            AppendSpaceDelimeter(stringBuilder);
+            AppendSpaceDelimiter(stringBuilder);
             stringBuilder.Append(NamePropertyName);
             stringBuilder.Append(name);
         }
 
         if (this.ValuePattern.First() is string pattern)
         {
-            AppendSpaceDelimeter(stringBuilder);
+            AppendSpaceDelimiter(stringBuilder);
             stringBuilder.Append(PatternPropertyName);
             stringBuilder.Append(pattern);
         }
 
         if (this.ValueRequired.First() is true)
         {
-            AppendSpaceDelimeter(stringBuilder);
+            AppendSpaceDelimiter(stringBuilder);
             stringBuilder.Append(RequiredPropertyName);
         }
 
         return stringBuilder.ToString();
     }
 
-    private static void AppendSpaceDelimeter(StringBuilder stringBuilder)
+    private static void AppendSpaceDelimiter(StringBuilder stringBuilder)
     {
         if (stringBuilder.Length > 0)
         {
-            stringBuilder.Append(SpaceDelimeter);
+            stringBuilder.Append(SpaceDelimiter);
         }
     }
 }

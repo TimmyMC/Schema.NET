@@ -15,7 +15,7 @@ public class GeneratorSchemaPropertyType
     public GeneratorSchemaPropertyType(string name, IEnumerable<string> csharpTypeStrings)
     {
         this.Name = name;
-        this.CSharpTypeStrings = new List<string>(csharpTypeStrings);
+        this.CSharpTypeStrings = [.. csharpTypeStrings];
     }
 
     public ICollection<string> CSharpTypeStrings { get; }

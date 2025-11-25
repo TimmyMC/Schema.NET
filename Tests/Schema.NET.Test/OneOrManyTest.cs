@@ -192,7 +192,7 @@ public class OneOrManyTest
         Assert.Equal(new List<object> { 1, 2 }, new OneOrMany<int>(new List<int> { 1, 2 }).Cast<object>());
 
     [Fact]
-    public void GetEnumeratorT_NoItems_ReturnsEmptyCllection() =>
+    public void GetEnumeratorT_NoItems_ReturnsEmptyCollection() =>
         Assert.Equal([], default(OneOrMany<string>).ToList());
 
     [Fact]

@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
+    <RootNamespace>Schema.NET</RootNamespace>
+    <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup Label="Package References">
+    <PackageReference Include="System.Text.Json" Version="10.0.0"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0"/>
+  </ItemGroup>
+
+  <ItemGroup Label="Project References">
+    <ProjectReference Include="../../Tools/Schema.NET.Tool/Schema.NET.Tool.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+  </ItemGroup>
+
+  <ItemGroup Label="Source Generation">
+    <AdditionalFiles Include="../../Data/*.*" LinkBase="Data" />
+  </ItemGroup>
+
+</Project>

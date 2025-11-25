@@ -56,6 +56,6 @@ internal static class FastActivator
 
     private static class ConstructorParameter<T1>
     {
-        public static readonly ParameterExpression[] SingleParameter = new[] { Expression.Parameter(typeof(T1)) };
+        public static readonly ParameterExpression[] SingleParameter = [Expression.Parameter(typeof(T1))];
     }
 }

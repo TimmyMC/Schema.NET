@@ -18,10 +18,6 @@ public class EnumerationValueComparer : IComparer<string>
 
     public int Compare(string? x, string? y)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(x);
-        ArgumentNullException.ThrowIfNull(y);
-#else
         if (x is null)
         {
             throw new ArgumentNullException(nameof(x));
@@ -31,7 +27,6 @@ public class EnumerationValueComparer : IComparer<string>
         {
             throw new ArgumentNullException(nameof(y));
         }
-#endif
 
         x = x.ToUpperInvariant();
         y = y.ToUpperInvariant();

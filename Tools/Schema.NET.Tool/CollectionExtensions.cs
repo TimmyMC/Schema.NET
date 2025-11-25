@@ -7,10 +7,6 @@ public static class CollectionExtensions
 {
     public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> items)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(collection);
-        ArgumentNullException.ThrowIfNull(items);
-#else
         if (collection is null)
         {
             throw new ArgumentNullException(nameof(collection));
@@ -20,7 +16,6 @@ public static class CollectionExtensions
         {
             throw new ArgumentNullException(nameof(items));
         }
-#endif
 
         foreach (var item in items)
         {

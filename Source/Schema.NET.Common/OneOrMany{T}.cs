@@ -3,7 +3,11 @@ namespace Schema.NET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// A single or list of values.
@@ -25,7 +29,7 @@ public readonly struct OneOrMany<T>
     {
         if (item is null || (item is string itemAsString && string.IsNullOrWhiteSpace(itemAsString)))
         {
-            this.collection = null;
+            this.collection = [];
             this.HasOne = false;
         }
         else
@@ -53,7 +57,7 @@ public readonly struct OneOrMany<T>
                     var item = span[i];
                     if (!string.IsNullOrWhiteSpace(item as string))
                     {
-                        items[index] = item!;
+                        items[index] = item;
                         index++;
                     }
                 }
@@ -88,7 +92,7 @@ public readonly struct OneOrMany<T>
             }
         }
 
-        this.collection = null;
+        this.collection = [];
         this.HasOne = false;
     }
 
@@ -96,28 +100,19 @@ public readonly struct OneOrMany<T>
     /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
     /// </summary>
     /// <param name="array">The array of values.</param>
-    public OneOrMany(params T?[] array)
-        : this(array.AsSpan())
-    {
-    }
+    public OneOrMany(params T?[] array) : this(array.AsSpan()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
     /// </summary>
     /// <param name="collection">The collection of values.</param>
-    public OneOrMany(IEnumerable<T?> collection)
-        : this(collection.ToArray().AsSpan())
-    {
-    }
+    public OneOrMany(IEnumerable<T?> collection) : this(collection.ToArray().AsSpan()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
     /// </summary>
     /// <param name="collection">The list of values.</param>
-    public OneOrMany(IEnumerable<object?> collection)
-        : this(collection.Cast<T?>().ToArray().AsSpan())
-    {
-    }
+    public OneOrMany(IEnumerable<object?> collection) : this(collection.Cast<T?>().ToArray().AsSpan()) { }
 
     /// <summary>
     /// Gets the number of elements contained in the <see cref="OneOrMany{T}"/>.
@@ -241,16 +236,15 @@ public readonly struct OneOrMany<T>
         {
             return [this.collection![0]];
         }
-        else if (this.HasMany)
+
+        if (this.HasMany)
         {
             var result = new T[this.collection!.Length];
             Array.Copy(this.collection, 0, result, 0, this.collection.Length);
             return result;
         }
-        else
-        {
-            return [];
-        }
+
+        return [];
     }
 
     /// <summary>
@@ -272,20 +266,7 @@ public readonly struct OneOrMany<T>
         }
         else if (this.HasMany && other.HasMany)
         {
-            if (this.collection!.Length != other.collection!.Length)
-            {
-                return false;
-            }
-
-            for (var i = 0; i < this.collection.Length; i++)
-            {
-                if (!EqualityComparer<T>.Default.Equals(this.collection[i], other.collection[i]))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return this.AsSpan().SequenceEqual(other.AsSpan());
         }
 
         return false;
@@ -298,7 +279,7 @@ public readonly struct OneOrMany<T>
     /// <returns>
     ///   <c>true</c> if the specified <see cref="object" /> is equal to this instance; otherwise, <c>false</c>.
     /// </returns>
-    public override bool Equals(object? obj) => obj is OneOrMany<T> oneOrMany && this.Equals(oneOrMany);
+    public override bool Equals([NotNullWhen(true)] object? obj) => obj is OneOrMany<T> oneOrMany && this.Equals(oneOrMany);
 
     /// <summary>
     /// Returns a hash code for this instance.
@@ -307,4 +288,10 @@ public readonly struct OneOrMany<T>
     /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
     /// </returns>
     public override int GetHashCode() => HashCode.OfEach(this.collection);
+
+    /// <summary>
+    /// Returns a <see cref="ReadOnlySpan{T}"/> wrapping the current items.
+    /// </summary>
+    /// <returns>A <see cref="ReadOnlySpan{T}"/> wrapping the current items.</returns>
+    public ReadOnlySpan<T> AsSpan() => this.collection.AsSpan();
 }

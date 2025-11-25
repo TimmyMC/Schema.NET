@@ -71,7 +71,7 @@ public static class SchemaSerializer
 
     private static string RemoveAllButFirstContext(string json)
     {
-        if (json.IndexOf(ContextPropertyJson, StringComparison.Ordinal) != -1)
+        if (json.Contains(ContextPropertyJson, StringComparison.Ordinal))
         {
             var stringBuilder = new StringBuilder(json);
             var startIndex = ContextPropertyJson.Length + 1; // We add the one to represent the opening curly brace.
