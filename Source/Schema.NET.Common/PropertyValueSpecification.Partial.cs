@@ -1,5 +1,6 @@
 namespace Schema.NET;
 
+using System.Linq;
 using System.Text;
 
 /// <summary>
