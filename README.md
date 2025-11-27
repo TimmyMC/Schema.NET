@@ -1,4 +1,5 @@
 [![Schema.NET NuGet Package](https://img.shields.io/nuget/v/Schema.NET.svg)](https://www.nuget.org/packages/Schema.NET)
+[![build](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml/badge.svg)](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml)
 
 [//]: # ([![Schema.NET NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET&#41;]&#40;https://www.nuget.org/packages/Schema.NET&#41;)
 
