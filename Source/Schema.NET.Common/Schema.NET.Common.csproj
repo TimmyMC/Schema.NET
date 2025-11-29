@@ -4,11 +4,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <ItemGroup Label="Package References">
-    <PackageReference Include="System.Text.Json" Version="10.0.0"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0"/>
-  </ItemGroup>
-
   <ItemGroup Label="Project References">
     <ProjectReference Include="../../Tools/Schema.NET.Tool/Schema.NET.Tool.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
   </ItemGroup>

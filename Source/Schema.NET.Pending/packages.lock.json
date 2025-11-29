@@ -15,9 +15,7 @@
         "contentHash": "568a6wcTivauIhbeWcCwfWwIn7UV7MeHEBvFB2uzGIpM2OhJ4eM/FZ8KS0yhPoNxnSpjGzz7x7CIjTxhslojQA==",
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "3.11.0",
-          "Microsoft.CodeAnalysis.Common": "[4.14.0]",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
+          "Microsoft.CodeAnalysis.Common": "[4.14.0]"
         }
       },
       "MinVer": {
@@ -42,28 +40,7 @@
         "resolved": "4.14.0",
         "contentHash": "PC3tuwZYnC+idaPuoC/AZpEdwrtX7qFpmnrfQkgobGIWiYmGi5MCRtl5mx6QrfMGQpK78X2lfIEoZDLg/qnuHg==",
         "dependencies": {
-          "Microsoft.CodeAnalysis.Analyzers": "3.11.0",
-          "System.Collections.Immutable": "9.0.0",
-          "System.Reflection.Metadata": "9.0.0"
-        }
-      },
-      "System.Collections.Immutable": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "QhkXUl2gNrQtvPmtBTQHb0YsUrDiDQ2QS09YbtTTiSjGcf7NBqtYbrG/BE06zcBPCKEwQGzIv13IVdXNOSub2w=="
-      },
-      "System.Reflection.Metadata": {
-        "type": "Transitive",
-        "resolved": "9.0.0",
-        "contentHash": "ANiqLu3DxW9kol/hMmTWbt3414t9ftdIuiIU7j80okq2YzAueo120M442xk1kDJWtmZTqWQn7wHDvMRipVOEOQ=="
-      },
-      "schema.net.common": {
-        "type": "Project",
-        "dependencies": {
-          "DotNet.ReproducibleBuilds": "[1.2.39, )",
-          "Microsoft.CodeAnalysis.CSharp": "[4.14.0, )",
-          "MinVer": "[6.0.0, )",
-          "System.Text.Json": "[10.0.0, )"
+          "Microsoft.CodeAnalysis.Analyzers": "3.11.0"
         }
       }
     },
@@ -139,15 +116,6 @@
         "type": "Transitive",
         "resolved": "10.0.0",
         "contentHash": "257hh1ep1Gqm1Lm0ulxf7vVBVMJuGN6EL4xSWjpi46DffXzm1058IiWsfSC06zSm7SniN+Tb5160UnXsSa8rRg=="
-      },
-      "schema.net.common": {
-        "type": "Project",
-        "dependencies": {
-          "DotNet.ReproducibleBuilds": "[1.2.39, )",
-          "Microsoft.CodeAnalysis.CSharp": "[4.14.0, )",
-          "MinVer": "[6.0.0, )",
-          "System.Text.Json": "[10.0.0, )"
-        }
       }
     }
   }
