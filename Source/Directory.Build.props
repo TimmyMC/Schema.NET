@@ -1,27 +1,22 @@
 <Project>
 
-  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+  <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
 
   <PropertyGroup Label="Build">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup Label="Source Generator Options">
-    <CompilerVisibleProperty Include="IncludePendingSchemaObjects" />
+    <CompilerVisibleProperty Include="IncludePendingSchemaObjects"/>
   </ItemGroup>
 
-  <PropertyGroup Label="Signing">
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../../Key.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
   <ItemGroup Label="Package References">
-    <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all" Version="1.1.1" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" PrivateAssets="all" Version="1.2.39" />
   </ItemGroup>
 
   <ItemGroup Label="Files">
-<!--    <None Include="..\..\Images\Icon.png" Pack="true" PackagePath="\" />-->
-    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <!--    <None Include="..\..\Images\Icon.png" Pack="true" PackagePath="\" />-->
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

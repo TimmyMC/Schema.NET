@@ -9,29 +9,21 @@ public class AddNumberTypeToMediaObjectHeightAndWidth : IClassOverride
 {
     public bool CanOverride(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         return string.Equals(c.Name, "MediaObject", StringComparison.OrdinalIgnoreCase) ||
-            c.CombinationOf.Any(co => string.Equals(co.Name, "MediaObject", StringComparison.OrdinalIgnoreCase));
+               c.CombinationOf.Any(co => string.Equals(co.Name, "MediaObject", StringComparison.OrdinalIgnoreCase));
     }
 
     public void Override(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         c
             .Properties

@@ -13,20 +13,9 @@ public class ContextJsonConverter : JsonConverter<JsonLdContext>
     /// <inheritdoc />
     public override JsonLdContext Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (typeToConvert is null)
-        {
-            throw new ArgumentNullException(nameof(typeToConvert));
-        }
 
-        if (options is null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
         var context = new JsonLdContext();
 
         string? name = null;
@@ -82,26 +71,9 @@ public class ContextJsonConverter : JsonConverter<JsonLdContext>
     /// <inheritdoc />
     public override void Write(Utf8JsonWriter writer, JsonLdContext value, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (writer is null)
-        {
-            throw new ArgumentNullException(nameof(writer));
-        }
-
-        if (value is null)
-        {
-            throw new ArgumentNullException(nameof(value));
-        }
-
-        if (options is null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
 
         if (string.IsNullOrWhiteSpace(value.Language))
         {

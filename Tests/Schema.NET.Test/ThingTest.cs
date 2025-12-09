@@ -334,14 +334,14 @@ public class ThingTest
     private static void CompareEqual<T>(T a, T? b)
     {
         Assert.NotNull(a);
-        Assert.Equal(a!.GetHashCode(), b?.GetHashCode());
+        Assert.Equal(a.GetHashCode(), b?.GetHashCode());
         Assert.True(a.Equals(b));
     }
 
     private static void CompareNotEqual<T>(T a, T? b)
     {
         Assert.NotNull(a);
-        Assert.NotEqual(a!.GetHashCode(), b?.GetHashCode());
+        Assert.NotEqual(a.GetHashCode(), b?.GetHashCode());
         Assert.False(a.Equals(b));
     }
 }

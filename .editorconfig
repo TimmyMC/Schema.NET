@@ -70,7 +70,7 @@ indent_style = tab
 ##########################################
 
 # Note that you must have the relevant Windows language pack installed on your machine for this to work.
-spelling_languages = en-GB            # NEW
+spelling_languages = en               # NEW
 spelling_error_severity = information # NEW
 spelling_checkable_types =            # NEW
 
@@ -129,7 +129,7 @@ dotnet_style_predefined_type_for_locals_parameters_members = true # NEW
 dotnet_style_predefined_type_for_member_access = true # NEW
 
 # Modifier preferences
-dotnet_style_require_accessibility_modifiers = always # NEW
+dotnet_style_require_accessibility_modifiers = for_non_interface_members # NEW
 
 # Parameter preferences
 dotnet_code_quality_unused_parameters = all

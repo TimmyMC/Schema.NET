@@ -11,15 +11,15 @@ using System.Text.Json.Serialization;
 public class JsonLdObject : IEquatable<JsonLdObject>
 {
     /// <summary>
-    /// Gets the context used to define the short-hand names that are used throughout a JSON-LD document.
-    /// These short-hand names are called terms and help developers to express specific identifiers in a compact
+    /// Gets the context used to define the shorthand names that are used throughout a JSON-LD document.
+    /// These shorthand names are called terms and help developers to express specific identifiers in a compact
     /// manner.
     /// When two people communicate with one another, the conversation takes place in a shared environment,
     /// typically called "the context of the conversation". This shared context allows the individuals to use
     /// shortcut terms, like the first name of a mutual friend, to communicate more quickly but without losing
     /// accuracy. A context in JSON-LD works in the same way. It allows two applications to use shortcut terms to
     /// communicate with one another more efficiently, but without losing accuracy.
-    /// Simply speaking, a context is used to map terms to IRIs. Terms are case sensitive and any valid string that
+    /// Simply speaking, a context is used to map terms to IRIs. Terms are case-sensitive and any valid string that
     /// is not a reserved JSON-LD keyword can be used as a term.
     /// </summary>
     [JsonPropertyName("@context")]

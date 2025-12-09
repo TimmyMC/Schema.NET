@@ -21,20 +21,8 @@ public class TimeSpanToISO8601DurationValuesJsonConverter : ValuesJsonConverter
     /// <param name="options">The JSON serializer options.</param>
     public override void WriteObject(Utf8JsonWriter writer, object? value, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (writer is null)
-        {
-            throw new ArgumentNullException(nameof(writer));
-        }
-
-        if (options is null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
 
         if (value is TimeSpan duration)
         {

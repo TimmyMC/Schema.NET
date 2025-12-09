@@ -8,14 +8,10 @@ public static class EnumerableExtensions
 {
     public static IEnumerable<T> Traverse<T>(T node, Func<T, T> parent)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(parent);
-#else
         if (parent is null)
         {
             throw new ArgumentNullException(nameof(parent));
         }
-#endif
 
         for (var x = node; x is not null; x = parent(x))
         {
@@ -25,14 +21,10 @@ public static class EnumerableExtensions
 
     public static IEnumerable<T> Traverse<T>(T node, Func<T, IEnumerable<T>> children)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(children);
-#else
         if (children is null)
         {
             throw new ArgumentNullException(nameof(children));
         }
-#endif
 
         yield return node;
 

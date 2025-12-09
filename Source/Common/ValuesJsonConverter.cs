@@ -42,20 +42,8 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <returns>The object value.</returns>
     public override IValues? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(typeToConvert);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (typeToConvert is null)
-        {
-            throw new ArgumentNullException(nameof(typeToConvert));
-        }
-
-        if (options is null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
 
         var dynamicConstructor = FastActivator.GetDynamicConstructor<IEnumerable<object?>>(typeToConvert);
         if (dynamicConstructor is not null)
@@ -100,21 +88,9 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <param name="options">The JSON serializer options.</param>
     public override void Write(Utf8JsonWriter writer, IValues value, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(value);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (writer is null)
-        {
-            throw new ArgumentNullException(nameof(writer));
-        }
-
-        if (options is null)
-        {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
 
         if (value is null || value.Count == 0)
         {
@@ -146,42 +122,28 @@ public class ValuesJsonConverter : JsonConverter<IValues>
     /// <param name="options">The JSON serializer options.</param>
     public virtual void WriteObject(Utf8JsonWriter writer, object? value, JsonSerializerOptions options)
     {
-#if NET
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(options);
-#else
-        if (writer is null)
-        {
-            throw new ArgumentNullException(nameof(writer));
-        }
 
-        if (options is null)
+        switch (value)
         {
-            throw new ArgumentNullException(nameof(options));
-        }
-#endif
-
-        if (value is null)
-        {
-            writer.WriteNullValue();
-        }
-        else if (value is TimeSpan timeSpan)
-        {
-            // System.Text.Json won't support timespans as time of day. See https://github.com/dotnet/runtime/issues/29932
-            writer.WriteStringValue(timeSpan.ToString("c", CultureInfo.InvariantCulture));
-        }
-        else if (value is decimal decimalNumber)
-        {
-            // TODO: Potential unnecessary allocation - may be able to write to a stackalloc span.
-            writer.WriteRawValue(decimalNumber.ToString("G0", CultureInfo.InvariantCulture));
-        }
-        else if (value is double doubleNumber)
-        {
-            writer.WriteRawValue(doubleNumber.ToString("G0", CultureInfo.InvariantCulture));
-        }
-        else
-        {
-            JsonSerializer.Serialize(writer, value, value.GetType(), options);
+            case null:
+                writer.WriteNullValue();
+                break;
+            case TimeSpan timeSpan:
+                // System.Text.Json won't support timespans as time of day. See https://github.com/dotnet/runtime/issues/29932
+                writer.WriteStringValue(timeSpan.ToString("c", CultureInfo.InvariantCulture));
+                break;
+            case decimal decimalNumber:
+                // TODO: Potential unnecessary allocation - may be able to write to a stackalloc span.
+                writer.WriteRawValue(decimalNumber.ToString("G0", CultureInfo.InvariantCulture));
+                break;
+            case double doubleNumber:
+                writer.WriteRawValue(doubleNumber.ToString("G0", CultureInfo.InvariantCulture));
+                break;
+            default:
+                JsonSerializer.Serialize(writer, value, value.GetType(), options);
+                break;
         }
     }
 
@@ -201,7 +163,7 @@ public class ValuesJsonConverter : JsonConverter<IValues>
                     var targetType = targetTypes[i];
                     if (targetType.IsAssignableFrom(explicitType))
                     {
-                        return objectRoot.Deserialize(explicitType!, options);
+                        return objectRoot.Deserialize(explicitType, options);
                     }
                 }
             }
@@ -217,13 +179,10 @@ public class ValuesJsonConverter : JsonConverter<IValues>
                         // If the target is an interface, attempt to identify concrete target
                         var localTargetType = underlyingTargetType;
                         var typeInfo = localTargetType.GetTypeInfo();
-#if NETCOREAPP3_0_OR_GREATER
+
                         if (typeInfo.IsInterface && TryGetConcreteType(typeInfo.Name[1..], out var concreteType))
-#else
-                        if (typeInfo.IsInterface && TryGetConcreteType(typeInfo.Name.Substring(1), out var concreteType))
-#endif
                         {
-                            localTargetType = concreteType!;
+                            localTargetType = concreteType;
                         }
 
                         return objectRoot.Deserialize(localTargetType, options);
@@ -456,10 +415,7 @@ public class ValuesJsonConverter : JsonConverter<IValues>
 
     private static bool TryGetConcreteType(
         string typeName,
-#if NETCOREAPP3_1_OR_GREATER
-        [NotNullWhen(true)]
-#endif
-        out Type? type)
+        [NotNullWhen(true)] out Type? type)
     {
         if (BuiltInThingTypeLookup.TryGetValue(typeName, out type))
         {

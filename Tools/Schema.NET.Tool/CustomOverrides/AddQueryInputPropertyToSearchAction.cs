@@ -8,28 +8,20 @@ public class AddQueryInputPropertyToSearchAction : IClassOverride
 {
     public bool CanOverride(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         return string.Equals(c.Name, "SearchAction", StringComparison.Ordinal);
     }
 
     public void Override(GeneratorSchemaClass c)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(c);
-#else
         if (c is null)
         {
             throw new ArgumentNullException(nameof(c));
         }
-#endif
 
         var property = new GeneratorSchemaProperty(c, "query-input", "QueryInput", "Gets or sets the query input search parameter.");
         property.Types.AddRange(

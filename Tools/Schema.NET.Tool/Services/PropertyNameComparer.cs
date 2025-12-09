@@ -17,10 +17,6 @@ public class PropertyNameComparer : IComparer<string>
 
     public int Compare(string? x, string? y)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(x);
-        ArgumentNullException.ThrowIfNull(y);
-#else
         if (x is null)
         {
             throw new ArgumentNullException(nameof(x));
@@ -30,7 +26,6 @@ public class PropertyNameComparer : IComparer<string>
         {
             throw new ArgumentNullException(nameof(y));
         }
-#endif
 
         if (x.Equals("ENDDATE", StringComparison.Ordinal))
         {

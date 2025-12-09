@@ -12,13 +12,8 @@ using Schema.NET.Tool.Repositories;
 
 public partial class SchemaService
 {
-#if NET8_0_OR_GREATER
-    [GeneratedRegex("^[0-9]", RegexOptions.Compiled)]
-    private static partial Regex StartsWithNumber();
-#else
     private static readonly Regex StartsWithNumberRegex = new Regex("^[0-9]", RegexOptions.Compiled);
     private static Regex StartsWithNumber() => StartsWithNumberRegex;
-#endif
     private readonly IEnumerable<IClassOverride> classOverrides;
     private readonly IEnumerable<IEnumerationOverride> enumerationOverrides;
     private readonly ISchemaRepository schemaRepository;
@@ -243,11 +238,7 @@ public partial class SchemaService
                     })
                     .Select(id =>
                     {
-#if NETSTANDARD2_0
                         var propertyTypeName = id.ToString().Replace("https://schema.org/", string.Empty);
-#else
-                        var propertyTypeName = id.ToString().Replace("https://schema.org/", string.Empty, StringComparison.Ordinal);
-#endif
                         var isPropertyTypeEnum = isEnumMap.Contains(propertyTypeName);
                         var csharpTypeStrings = GetCSharpTypeStrings(
                             propertyName,
@@ -313,30 +304,16 @@ public partial class SchemaService
                 return ["DateTimeOffset?"];
             case "Integer":
             case "Number" when
-#if NETSTANDARD2_0
                 propertyName.Contains("NumberOf") ||
                 propertyName.Contains("Year") ||
                 propertyName.Contains("Count") ||
                 propertyName.Contains("Age"):
-#else
-                propertyName.Contains("NumberOf", StringComparison.Ordinal) ||
-                propertyName.Contains("Year", StringComparison.Ordinal) ||
-                propertyName.Contains("Count", StringComparison.Ordinal) ||
-                propertyName.Contains("Age", StringComparison.Ordinal):
-#endif
                 return ["int?"];
             case "Number" when
-#if NETSTANDARD2_0
                 propertyName.Contains("Price") ||
                 propertyName.Contains("Amount") ||
                 propertyName.Contains("Salary") ||
                 propertyName.Contains("Discount"):
-#else
-                propertyName.Contains("Price", StringComparison.Ordinal) ||
-                propertyName.Contains("Amount", StringComparison.Ordinal) ||
-                propertyName.Contains("Salary", StringComparison.Ordinal) ||
-                propertyName.Contains("Discount", StringComparison.Ordinal):
-#endif
                 return ["decimal?"];
             case "Number":
                 return ["double?"];
