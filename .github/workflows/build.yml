@@ -107,6 +107,8 @@ jobs:
     environment:
       name: "NuGet"
       url: https://www.nuget.org/packages/SchemaDotNet
+    permissions:
+      id-token: write
     runs-on: windows-latest
     steps:
       - name: "Download Artefact"
