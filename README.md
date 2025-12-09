@@ -1,7 +1,7 @@
-[![Schema.NET NuGet Package](https://img.shields.io/nuget/v/Schema.NET.svg)](https://www.nuget.org/packages/Schema.NET)
+[![Schema.NET NuGet Package](https://img.shields.io/nuget/v/SchemaDotNet.svg)](https://www.nuget.org/packages/SchemaDotNet)
 [![build](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml/badge.svg)](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml)
 
-[//]: # ([![Schema.NET NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET&#41;]&#40;https://www.nuget.org/packages/Schema.NET&#41;)
+[//]: # ([![Schema.NET NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/SchemaDotNet&#41;]&#40;https://www.nuget.org/packages/SchemaDotNet&#41;)
 
 Schema.org objects turned into strongly typed C# POCO classes for use in .NET. All classes can be serialized into JSON/JSON-LD and XML, typically used to represent structured data in the `head` section of `html` page.
 
@@ -149,11 +149,11 @@ For more examples and actual running code samples, take a look at the unit tests
 
 ## Schema.NET.Pending
 
-There are many pending types on [schema.org](https://schema.org) which are not yet fully formed and ready for production. If you need to use these, you can install the [Schema.NET.Pending](https://www.nuget.org/packages/Schema.NET.Pending) NuGet package instead of [Schema.NET](https://www.nuget.org/packages/Schema.NET). This package contains all released schema types as well as all pending types.
+There are many pending types on [schema.org](https://schema.org) which are not yet fully formed and ready for production. If you need to use these, you can install the [Schema.NET.Pending](https://www.nuget.org/packages/SchemaDotNet.Pending) NuGet package instead of [Schema.NET](https://www.nuget.org/packages/SchemaDotNet). This package contains all released schema types as well as all pending types.
 
-[![Schema.NET.Pending NuGet Package](https://img.shields.io/nuget/v/Schema.NET.Pending.svg)](https://www.nuget.org/packages/Schema.NET.Pending)
+[![Schema.NET.Pending NuGet Package](https://img.shields.io/nuget/v/Schema.NET.Pending.svg)](https://www.nuget.org/packages/SchemaDotNet.Pending)
 
-[//]: # ([![Schema.NET.Pending NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET.Pending&#41;]&#40;https://www.nuget.org/packages/Schema.NET.Pending&#41;)
+[//]: # ([![Schema.NET.Pending NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET.Pending&#41;]&#40;https://www.nuget.org/packages/SchemaDotNet.Pending&#41;)
 
 ## Continuous Integration
 

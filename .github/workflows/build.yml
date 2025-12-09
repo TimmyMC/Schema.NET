@@ -106,7 +106,7 @@ jobs:
     if: github.event_name == 'release'
     environment:
       name: "NuGet"
-      url: https://www.nuget.org/packages/Schema.NET
+      url: https://www.nuget.org/packages/SchemaDotNet
     runs-on: windows-latest
     steps:
       - name: "Download Artefact"
