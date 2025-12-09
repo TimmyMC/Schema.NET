@@ -29,14 +29,16 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v5.0.1
+        uses: actions/checkout@v6
         with:
           lfs: true
           fetch-depth: 0
-      - name: "Install .NET 8.0 SDK"
+      - name: "Setup dotnet"
         uses: actions/setup-dotnet@v5.0.0
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: |
+            8.0.x
+            10.0.x
       - name: "Dotnet Tool Restore"
         run: dotnet tool restore
         shell: pwsh
@@ -84,6 +86,7 @@ jobs:
       url: https://github.com/TimmyMC/Schema.NET/packages
     permissions:
       packages: write
+      id-token: write
     runs-on: windows-latest
     steps:
       - name: "Download Artefact"
@@ -110,9 +113,14 @@ jobs:
         uses: actions/download-artifact@v6.0.0
         with:
           name: "windows-latest"
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: login
+        with:
+          user: "TimmyMC"
       - name: "Dotnet NuGet Push"
         run: |
           Get-ChildItem .\ -Filter *.nupkg |
           Where-Object { !$_.Name.Contains('preview') } |
-          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{secrets.NUGET_API_KEY}} }
+          ForEach-Object { dotnet nuget push $_ --source https://api.nuget.org/v3/index.json --skip-duplicate --api-key ${{ steps.login.outputs.NUGET_API_KEY }} }
         shell: pwsh

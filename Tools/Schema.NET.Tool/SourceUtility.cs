@@ -13,14 +13,10 @@ public static partial class SourceUtility
 
     public static string Render(string value, int indent = 0)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(value);
-#else
         if (value is null)
         {
             throw new ArgumentNullException(nameof(value));
         }
-#endif
 
         var indentString = new string(Space, indent);
         return indentString + EnvironmentAgnosticNewLineReplace().Replace(value, "$1" + indentString);
@@ -40,10 +36,6 @@ public static partial class SourceUtility
     public static string RenderItems<T>(IReadOnlyCollection<T> items, Func<int, int, T, string> action, int indent = 0,
         SourceDelimeter sourceDelimeter = SourceDelimeter.None)
     {
-#if NET
-        ArgumentNullException.ThrowIfNull(items);
-        ArgumentNullException.ThrowIfNull(action);
-#else
         if (items is null)
         {
             throw new ArgumentNullException(nameof(items));
@@ -53,7 +45,6 @@ public static partial class SourceUtility
         {
             throw new ArgumentNullException(nameof(action));
         }
-#endif
 
         var stringBuilder = new StringBuilder();
         for (var i = 0; i < items.Count; ++i)
@@ -105,17 +96,9 @@ public static partial class SourceUtility
         return element.InnerXml;
     }
 
-#if NET
-    [GeneratedRegex("[\n ]{0,}\n[\n ]{0,}", RegexOptions.Compiled)]
-    private static partial Regex NewLineReplace();
-
-    [GeneratedRegex("(\r?\n)", RegexOptions.Compiled)]
-    private static partial Regex EnvironmentAgnosticNewLineReplace();
-#else
     private static readonly Regex NewLineRegex = new Regex("[\n ]{0,}\n[\n ]{0,}", RegexOptions.Compiled);
     private static Regex NewLineReplace() => NewLineRegex;
 
     private static readonly Regex EnvironmentAgnosticNewLineRegex = new Regex("(\r?\n)", RegexOptions.Compiled);
     private static Regex EnvironmentAgnosticNewLineReplace() => EnvironmentAgnosticNewLineRegex;
-#endif
 }
