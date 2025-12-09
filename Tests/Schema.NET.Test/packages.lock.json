@@ -134,7 +134,7 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
-      "schema.net": {
+      "SchemaDotNet": {
         "type": "Project"
       }
     },
@@ -290,7 +290,7 @@
           "xunit.extensibility.core": "[2.9.3]"
         }
       },
-      "schema.net": {
+      "SchemaDotNet": {
         "type": "Project",
         "dependencies": {
           "System.Text.Json": "[10.0.0, )"
