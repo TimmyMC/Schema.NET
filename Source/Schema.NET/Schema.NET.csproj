@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <PropertyGroup Label="Package">
+    <PackageId>SchemaDotNet</PackageId>
     <Product>SchemaDotNet</Product>
     <Description>Schema.org objects turned into strongly typed C# POCO classes for use in .NET. All classes can be serialized into JSON/JSON-LD and XML, typically used to represent structured data in the head section of html page.</Description>
     <PackageTags>Schema;.NET;Schema.org;Schema.NET;Structured Data;Google Structured Data</PackageTags>
