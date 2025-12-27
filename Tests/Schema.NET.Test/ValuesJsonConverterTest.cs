@@ -31,7 +31,7 @@ public class ValuesJsonConverterTest
     [Fact]
     public void WriteJson_Values_GreaterThanOneCountWritesArray()
     {
-        var value = new Values<int?, string>(new[] { "A", "B" });
+        var value = new Values<int?, string>(["A", "B"]);
         var json = SerializeObject(value);
 
         var expectedJson = /*lang=json,strict*/

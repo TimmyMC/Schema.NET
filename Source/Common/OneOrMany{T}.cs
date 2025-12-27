@@ -5,16 +5,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// A single or list of values.
 /// </summary>
 /// <typeparam name="T">The type of the values.</typeparam>
-/// <seealso cref="ICollection{T}" />
+/// <seealso cref="IReadOnlyCollection{T}" />
+[CollectionBuilder(typeof(OneOrManyBuilder), nameof(OneOrManyBuilder.Create))]
 #pragma warning disable CA1710 // Identifiers should have correct suffix.
-public readonly struct OneOrMany<T>
+public readonly struct OneOrMany<T> : IReadOnlyCollection<T>, IValues, IEquatable<OneOrMany<T>>
 #pragma warning restore CA1710 // Identifiers should have correct suffix.
-    : IReadOnlyCollection<T>, IValues, IEquatable<OneOrMany<T>>
 {
     private readonly T[]? collection;
 
@@ -40,7 +41,7 @@ public readonly struct OneOrMany<T>
     /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
     /// </summary>
     /// <param name="span">The span of values.</param>
-    public OneOrMany(ReadOnlySpan<T?> span)
+    public OneOrMany(params ReadOnlySpan<T?> span)
     {
         if (!span.IsEmpty)
         {
@@ -49,9 +50,8 @@ public readonly struct OneOrMany<T>
 
             if (typeof(T) == typeof(string))
             {
-                for (var i = 0; i < span.Length; i++)
+                foreach (var item in span)
                 {
-                    var item = span[i];
                     if (!string.IsNullOrWhiteSpace(item as string))
                     {
                         items[index] = item;
@@ -61,9 +61,8 @@ public readonly struct OneOrMany<T>
             }
             else
             {
-                for (var i = 0; i < span.Length; i++)
+                foreach (var item in span)
                 {
-                    var item = span[i];
                     if (item is not null)
                     {
                         items[index] = item;
@@ -92,12 +91,6 @@ public readonly struct OneOrMany<T>
         this.collection = null;
         this.HasOne = false;
     }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
-    /// </summary>
-    /// <param name="array">The array of values.</param>
-    public OneOrMany(params T?[] array) : this(array.AsSpan()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
@@ -210,9 +203,9 @@ public readonly struct OneOrMany<T>
     {
         if (this.collection is not null)
         {
-            for (var i = 0; i < this.collection.Length; i++)
+            foreach (var item in this.collection)
             {
-                yield return this.collection[i];
+                yield return item;
             }
         }
     }
@@ -293,4 +286,16 @@ public readonly struct OneOrMany<T>
     /// </summary>
     /// <returns>A <see cref="ReadOnlySpan{T}"/> wrapping the current items.</returns>
     public ReadOnlySpan<T> AsSpan() => this.collection.AsSpan();
+}
+
+/// <summary>
+/// Contains the generic static constructors needed to support collection expressions.
+/// </summary>
+public static class OneOrManyBuilder
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OneOrMany{T}"/> struct.
+    /// </summary>
+    /// <param name="items">The span of values.</param>
+    public static OneOrMany<T> Create<T>(ReadOnlySpan<T> items) => new(items);
 }

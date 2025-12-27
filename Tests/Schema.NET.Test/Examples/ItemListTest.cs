@@ -9,25 +9,25 @@ public class ItemListTest
 {
     private readonly ItemList itemlist = new()
     {
-        ItemListElement = new List<IListItem?>() // Required
+        ItemListElement = // Required
+        [
+            new ListItem() // Required
+            {
+                Position = 1, // Required
+                Item = new Recipe() // Required
                 {
-                    new ListItem() // Required
-                    {
-                        Position = 1, // Required
-                        Item = new Recipe() // Required
-                        {
-                            Name = "Recipe 1",
-                        },
-                    },
-                    new ListItem
-                    {
-                        Position = 2,
-                        Item = new Recipe
-                        {
-                            Name = "Recipe 2",
-                        },
-                    },
+                    Name = "Recipe 1",
                 },
+            },
+            new ListItem
+            {
+                Position = 2,
+                Item = new Recipe
+                {
+                    Name = "Recipe 2",
+                },
+            },
+        ],
     };
 
     private readonly string json = /*lang=json,strict*/

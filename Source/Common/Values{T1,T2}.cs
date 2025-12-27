@@ -4,16 +4,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 /// <summary>
 /// A single or list of values which can be any of the specified types.
 /// </summary>
 /// <typeparam name="T1">The first type the values can take.</typeparam>
 /// <typeparam name="T2">The second type the values can take.</typeparam>
-#pragma warning disable CA1710 // Identifiers should have correct suffix.
-public readonly struct Values<T1, T2>
-#pragma warning restore CA1710 // Identifiers should have correct suffix.
-    : IReadOnlyCollection<object?>, IValues, IEquatable<Values<T1, T2>>
+[CollectionBuilder(typeof(ValuesBuilder), nameof(ValuesBuilder.Create))]
+public readonly struct Values<T1, T2> : IReadOnlyCollection<object?>, IValues, IEquatable<Values<T1, T2>>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Values{T1,T2}"/> struct.
@@ -43,19 +42,40 @@ public readonly struct Values<T1, T2>
     /// Initializes a new instance of the <see cref="Values{T1,T2}"/> struct.
     /// </summary>
     /// <param name="items">The items.</param>
-    public Values(params object?[] items)
-        : this(items.AsEnumerable())
+    public Values(IEnumerable<object?> items)
     {
+        ArgumentNullException.ThrowIfNull(items);
+
+        List<T1>? items1 = null;
+        List<T2>? items2 = null;
+
+        foreach (var item in items)
+        {
+            if (item is T2 itemT2)
+            {
+                items2 ??= [];
+                items2.Add(itemT2);
+            }
+            else if (item is T1 itemT1)
+            {
+                items1 ??= [];
+                items1.Add(itemT1);
+            }
+        }
+
+        this.Value1 = items1 == null ? default : (OneOrMany<T1>)items1!;
+        this.Value2 = items2 == null ? default : (OneOrMany<T2>)items2!;
+
+        this.HasValue1 = this.Value1.Count > 0;
+        this.HasValue2 = this.Value2.Count > 0;
     }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Values{T1,T2}"/> struct.
     /// </summary>
     /// <param name="items">The items.</param>
-    public Values(IEnumerable<object?> items)
+    public Values(params ReadOnlySpan<object?> items)
     {
-        ArgumentNullException.ThrowIfNull(items);
-
         List<T1>? items1 = null;
         List<T2>? items2 = null;
 
@@ -314,4 +334,18 @@ public readonly struct Values<T1, T2>
     /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
     /// </returns>
     public override int GetHashCode() => HashCode.Of(this.Value1).And(this.Value2);
+}
+
+/// <summary>
+/// Contains the generic static constructors needed to support collection expressions.
+/// </summary>
+public static partial class ValuesBuilder
+{
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Values{T1,T2}"/> struct.
+    /// </summary>
+    /// <param name="items">A single or list of values which can be any of the specified types.</param>
+    /// <typeparam name="T1">The first type the values can take.</typeparam>
+    /// <typeparam name="T2">The second type the values can take.</typeparam>
+    public static Values<T1, T2> Create<T1, T2>(ReadOnlySpan<object?> items) => new(items);
 }

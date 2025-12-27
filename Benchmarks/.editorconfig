@@ -11,3 +11,8 @@ dotnet_diagnostic.IDE0005.severity = none
 # CA1515: Consider making public types internal
 # Justification: Won't be exposed in the NuGet packages
 dotnet_diagnostic.CA1515.severity = none
+
+# CA1822: Mark members as static
+# Justification:  Benchmark methods shouldn't be static
+dotnet_diagnostic.CA1822.severity = none
+dotnet_diagnostic.CA1707.severity = none

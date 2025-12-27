@@ -1,7 +1,17 @@
-[![Schema.NET NuGet Package](https://img.shields.io/nuget/v/SchemaDotNet.svg)](https://www.nuget.org/packages/SchemaDotNet)
-[![build](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml/badge.svg)](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml)
+# (Temporary?) Fork of [Schema.NET](https://github.com/RehanSaeed/Schema.NET)
+### Changes:
+- Add targets for .NET 8 - 10
+- Add support for [collection expressions](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions)
+- Performance improvements
+### Why the fork?
+> I created this fork for to use in a large webshop, I initially wanted the package to target .net 8.<br/>
+> But once begun, I added support for collection expressions, and other small tweaks.
 
-[//]: # ([![Schema.NET NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/SchemaDotNet&#41;]&#40;https://www.nuget.org/packages/SchemaDotNet&#41;)
+<hr/>
+
+[![SchemaDotNet NuGet Package](https://img.shields.io/nuget/v/SchemaDotNet.svg)](https://www.nuget.org/packages/SchemaDotNet)
+[![build](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml/badge.svg)](https://github.com/TimmyMC/Schema.NET/actions/workflows/build.yml)
+[![SchemaDotNet NuGet Package Downloads](https://img.shields.io/nuget/dt/SchemaDotNet)](https://www.nuget.org/packages/SchemaDotNet)
 
 Schema.org objects turned into strongly typed C# POCO classes for use in .NET. All classes can be serialized into JSON/JSON-LD and XML, typically used to represent structured data in the `head` section of `html` page.
 
@@ -33,7 +43,7 @@ If writing the result into a `<script>` element, be sure to use the `.ToHtmlEsca
 
 ## What is Schema.org?
 
-[schema.org](https://schema.org) defines a set of standard classes and their properties for objects and services in the real world. This machine readable format is a common standard used across the web for describing things.
+[schema.org](https://schema.org) defines a set of standard classes and their properties for objects and services in the real world. This machine-readable format is a common standard used across the web for describing things.
 
 ## Where is Schema.org Used?
 
@@ -77,7 +87,7 @@ Windows UWP apps let you share data using schema.org classes. [Here](https://doc
 
 schema.org defines classes and properties, where each property can have a single value or an array of multiple values. Additionally, properties can have multiple types e.g. an `Address` property could have a type of `string` or a type of `PostalAddress` which has it's own properties such as `StreetAddress` or `PostalCode` which breaks up an address into it's constituent parts.
 
-To facilitate this Schema.NET uses some clever C# generics and implicit type conversions so that setting a single or multiple values is possible and that setting a `string` or `PostalAddress` is also possible:
+To facilitate this SchemaDotNet uses some clever C# generics and implicit type conversions so that setting a single or multiple values is possible and that setting a `string` or `PostalAddress` is also possible:
 
 ```C#
 // Single string address
@@ -89,11 +99,11 @@ var organization = new Organization()
 // Multiple string addresses
 var organization = new Organization()
 {
-    Address = new List<string>()
-    { 
+    Address =
+    [ 
         "123 Old Kent Road E10 6RL",
         "456 Finsbury Park Road SW1 2JS"
-    }
+    ]
 };
 
 // Single PostalAddress address
@@ -109,8 +119,8 @@ var organization = new Organization()
 // Multiple PostalAddress addresses
 var organization = new Organization()
 {
-    Address = new List<PostalAddress>()
-    {
+    Address =
+    [
         new PostalAddress()
         {
             StreetAddress = "123 Old Kent Road",
@@ -121,17 +131,17 @@ var organization = new Organization()
             StreetAddress = "456 Finsbury Park Road",
             PostalCode = "SW1 2JS"
         }
-    }
+    ]
 };
 
 // Mixed Author types
 var book = new Book()
 {
-    Author = new List<object>()
-    {
+    Author =
+    [
         new Organization() { Name = "Penguin" },
         new Person() { Name = "J.D. Salinger" }
-    }
+    ]
 };
 
 // Deconstruct a property containing mixed types
@@ -145,18 +155,11 @@ This magic is all carried out using [implicit conversion operators](https://docs
 
 ## More Examples
 
-For more examples and actual running code samples, take a look at the unit tests in the project source code.
+For more examples and actual running code samples, take a look at the [unit tests](https://github.com/TimmyMC/Schema.NET/tree/main/Tests/Schema.NET.Test/Examples) in the project source code.
 
-## Schema.NET.Pending
+## SchemaDotNet.Pending
 
-There are many pending types on [schema.org](https://schema.org) which are not yet fully formed and ready for production. If you need to use these, you can install the [Schema.NET.Pending](https://www.nuget.org/packages/SchemaDotNet.Pending) NuGet package instead of [Schema.NET](https://www.nuget.org/packages/SchemaDotNet). This package contains all released schema types as well as all pending types.
+There are many pending types on [schema.org](https://schema.org) which are not yet fully formed and ready for production. If you need to use these, you can install the [SchemaDotNet.Pending](https://www.nuget.org/packages/SchemaDotNet.Pending) NuGet package instead of [SchemaDotNet](https://www.nuget.org/packages/SchemaDotNet). This package contains all released schema types as well as all pending types.
 
-[![Schema.NET.Pending NuGet Package](https://img.shields.io/nuget/v/Schema.NET.Pending.svg)](https://www.nuget.org/packages/SchemaDotNet.Pending)
-
-[//]: # ([![Schema.NET.Pending NuGet Package Downloads]&#40;https://img.shields.io/nuget/dt/Schema.NET.Pending&#41;]&#40;https://www.nuget.org/packages/SchemaDotNet.Pending&#41;)
-
-## Continuous Integration
-
-| Name            | Operating System      | Status | History                                                                                                                                                                                  |
-| :---            | :---                  | :---   |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| GitHub Actions  | Ubuntu, Mac & Windows | [![GitHub Actions Status](https://github.com/TimmyMC/Schema.NET/workflows/Build/badge.svg?branch=main)](https://github.com/TimmyMC/Schema.NET/actions) | [![GitHub Actions Build History](https://buildstats.info/github/chart/TimmyMC/Schema.NET?branch=main&includeBuildsFromPullRequest=false)](https://github.com/TimmyMC/Schema.NET/actions) |
+[![SchemaDotNet.Pending NuGet Package](https://img.shields.io/nuget/v/SchemaDotNet.Pending.svg)](https://www.nuget.org/packages/SchemaDotNet.Pending)
+[![SchemaDotNet.Pending NuGet Package Downloads](https://img.shields.io/nuget/dt/SchemaDotNet.Pending)](https://www.nuget.org/packages/SchemaDotNet.Pending)

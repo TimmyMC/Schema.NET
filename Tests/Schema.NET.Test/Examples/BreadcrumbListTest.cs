@@ -9,29 +9,29 @@ public class BreadcrumbListTest
 {
     private readonly BreadcrumbList breadcrumbList = new()
     {
-        ItemListElement = new List<IListItem?>
-        {
-                new ListItem
+        ItemListElement =
+        [
+            new ListItem
+            {
+                Position = 1,
+                Item = new Book
                 {
-                    Position = 1,
-                    Item = new Book
-                    {
-                        Id = new Uri("https://example.com/books"),
-                        Name = "Books",
-                        Image = new Uri("https://example.com/images/icon-book.png"),
-                    },
-                },
-                new ListItem
-                {
-                    Position = 2,
-                    Item = new Person
-                    {
-                        Id = new Uri("https://example.com/books/authors"),
-                        Name = "Authors",
-                        Image = new Uri("https://example.com/images/icon-author.png"),
-                    },
+                    Id = new Uri("https://example.com/books"),
+                    Name = "Books",
+                    Image = new Uri("https://example.com/images/icon-book.png"),
                 },
             },
+            new ListItem
+            {
+                Position = 2,
+                Item = new Person
+                {
+                    Id = new Uri("https://example.com/books/authors"),
+                    Name = "Authors",
+                    Image = new Uri("https://example.com/images/icon-author.png"),
+                },
+            },
+        ],
     };
 
     private readonly string json = /*lang=json,strict*/

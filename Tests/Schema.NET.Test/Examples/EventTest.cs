@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 // https://developers.google.com/search/docs/data-types/events
@@ -32,26 +31,26 @@ public class EventTest
         },
         Image = new Uri("https://www.example.com/event_image/12345"), // Recommended
         EndDate = new DateTimeOffset(2017, 4, 24, 23, 0, 0, TimeSpan.FromHours(-8)), // Recommended
-        Offers = new List<IOffer?>() // Recommended
+        Offers = // Recommended
+        [
+            new Offer
             {
-                new Offer
-                {
-                    Url = new Uri("https://www.example.com/event_offer/12345_201803180430"), // Recommended
-                    Price = 30M, // Recommended
-                    PriceCurrency = "USD", // Recommended
-                    Availability = ItemAvailability.InStock, // Recommended
-                    ValidFrom = new DateTimeOffset(2017, 1, 20, 16, 20, 0, TimeSpan.FromHours(-8)), // Recommended
-                    Category = NullString!,
-                },
-                new Offer
-                {
-                    Url = new Uri("https://www.example.com/event_offer/12345_201803180430"), // Recommended
-                    Price = 30M, // Recommended
-                    PriceCurrency = "USD", // Recommended
-                    Availability = NullItemAvailability, // Should be ignored
-                    ValidFrom = new DateTimeOffset(2017, 1, 20, 16, 20, 0, TimeSpan.FromHours(-8)), // Recommended
-                },
+                Url = new Uri("https://www.example.com/event_offer/12345_201803180430"), // Recommended
+                Price = 30M, // Recommended
+                PriceCurrency = "USD", // Recommended
+                Availability = ItemAvailability.InStock, // Recommended
+                ValidFrom = new DateTimeOffset(2017, 1, 20, 16, 20, 0, TimeSpan.FromHours(-8)), // Recommended
+                Category = NullString!,
             },
+            new Offer
+            {
+                Url = new Uri("https://www.example.com/event_offer/12345_201803180430"), // Recommended
+                Price = 30M, // Recommended
+                PriceCurrency = "USD", // Recommended
+                Availability = NullItemAvailability, // Should be ignored
+                ValidFrom = new DateTimeOffset(2017, 1, 20, 16, 20, 0, TimeSpan.FromHours(-8)), // Recommended
+            },
+        ],
         Performer = new Person() // Recommended
         {
             Name = "Andy Lagunoff", // Recommended

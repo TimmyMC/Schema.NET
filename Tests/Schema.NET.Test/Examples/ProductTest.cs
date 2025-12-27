@@ -21,7 +21,7 @@ public class ProductTest
             ReviewCount = 89,
             RatingValue = 4.4D,
         },
-        Review = new OneOrMany<IReview>((IReview)null!), // Recommended
+        Review = [], // Recommended
         Offers = new Offer() // Recommended
         {
             Url = (Uri)null!, // Recommended
