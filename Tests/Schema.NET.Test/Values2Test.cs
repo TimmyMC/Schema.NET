@@ -2,130 +2,30 @@ namespace Schema.NET.Test;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using TestData;
 using Xunit;
 
 public class Values2Test
 {
-    [Fact]
-    public void Constructor_Value1Passed_OnlyValue1HasValue()
+    [Theory]
+    [ClassData(typeof(Values2ConstructorScenarios))]
+    [SuppressMessage("Usage", "xUnit1045:Avoid using TheoryData type arguments that might not be serializable")]
+    public void ConstructorScenarios(Values2TestScenario s)
     {
-        var values = new Values<int, string>(1);
+        var values = s.ConstructorCall();
 
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.Equal([1], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_Value2Passed_OnlyValue2HasValue()
-    {
-        var values = new Values<int, string>("Foo");
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal(["Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_Items_HasAllItems()
-    {
-        var values = new Values<int, string>(1, "Foo");
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal([1, "Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_StringItems_NullOrWhitespaceDoesntHaveValue()
-    {
-        object[] nullOrWhitespaceValues =
-        [
-            string.Empty,
-            null!,
-            "\u2028 \u2029 \u0009 \u000A \u000B \u000C \u000D \u0085"
-        ];
-        var values = new Values<int, string>(nullOrWhitespaceValues);
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
+        Assert.Equal(s.ExpectedHasValue1, values.HasValue1);
+        Assert.Equal(s.ExpectedHasValue2, values.HasValue2);
+        Assert.Equal(s.ExpectedCountValue1, values.Value1.Count);
+        Assert.Equal(s.ExpectedCountValue2, values.Value2.Count);
+        Assert.Equal(s.ExpectedValues, values.Cast<object>().ToList());
     }
 
     [Fact]
     public void Constructor_NullList_ThrowsArgumentNullException() =>
         Assert.Throws<ArgumentNullException>(() => new Values<int, string>((List<object>)null!));
-
-    [Fact]
-    public void CollectionExpression_Value1Passed_OnlyValue1HasValue()
-    {
-        Values<int, string> values = [1];
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.Equal([1], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_Value2Passed_OnlyValue2HasValue()
-    {
-        Values<int, string> values = ["Foo"];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal(["Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_Items_HasAllItems()
-    {
-        Values<int, string> values = [1, "Foo"];
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal([1, "Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_StringItems_NullOrWhitespaceDoesntHaveValue()
-    {
-        Values<int, string> values =
-        [
-            string.Empty,
-            null!,
-            "\u2028 \u2029 \u0009 \u000A \u000B \u000C \u000D \u0085"
-        ];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
-    }
-
-    [Fact]
-    public void CollectionExpression_NoItems_HasNoItems()
-    {
-        Values<int, string> values = [];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
-    }
 
     [Theory]
     [InlineData(0)]
@@ -282,31 +182,31 @@ public class Values2Test
 
     [Fact]
     public void Equals_EqualValuesPassed_ReturnsTrue() =>
-        Assert.True(new Values<int, string>(new object[] { 0, "Foo" }).Equals(new object[] { 0, "Foo" }));
+        Assert.True(new Values<int, string>(0, "Foo").Equals(new object[] { 0, "Foo" }));
 
     [Fact]
     public void Equals_MixedTypes_Value1EqualValue2NotEqual_ReturnsFalse() =>
-        Assert.False(new Values<int, string>(new object[] { 0, "Foo" }).Equals(new Values<int, string>(new object[] { 0, "Bar" })));
+        Assert.False(new Values<int, string>(0, "Foo").Equals(new Values<int, string>(0, "Bar")));
 
     [Fact]
     public void Equals_MixedTypes_Value1NotEqualValue2Equal_ReturnsFalse() =>
-        Assert.False(new Values<int, string>(new object[] { 0, "Foo" }).Equals(new Values<int, string>(new object[] { 1, "Foo" })));
+        Assert.False(new Values<int, string>(0, "Foo").Equals(new Values<int, string>(1, "Foo")));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue2_ReturnsFalse() =>
-        Assert.False(new Values<int, string>([0]).Equals(new Values<int, string>(new object[] { 0, "Foo" })));
+        Assert.False(new Values<int, string>([0]).Equals(new Values<int, string>(0, "Foo")));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue1_ReturnsFalse() =>
-        Assert.False(new Values<int, string>(["Foo"]).Equals(new Values<int, string>(new object[] { 0, "Foo" })));
+        Assert.False(new Values<int, string>(["Foo"]).Equals(new Values<int, string>(0, "Foo")));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue2_ReturnsFalse() =>
-        Assert.False(new Values<int, string>(new object[] { 0, "Foo" }).Equals(new Values<int, string>([0])));
+        Assert.False(new Values<int, string>(0, "Foo").Equals(new Values<int, string>([0])));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue1_ReturnsFalse() =>
-        Assert.False(new Values<int, string>(new object[] { 0, "Foo" }).Equals(new Values<int, string>(["Foo"])));
+        Assert.False(new Values<int, string>(0, "Foo").Equals(new Values<int, string>(["Foo"])));
 
     [Fact]
     public void GetHashCode_Value1Passed_ReturnsMatchingHashCode() =>

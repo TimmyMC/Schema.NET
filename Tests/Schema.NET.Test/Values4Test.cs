@@ -2,217 +2,29 @@ namespace Schema.NET.Test;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using TestData;
 using Xunit;
 
 public class Values4Test
 {
-    [Fact]
-    public void Constructor_Value1Passed_OnlyValue1HasValue()
+    [Theory]
+    [ClassData(typeof(Values4ConstructorScenarios))]
+    [SuppressMessage("Usage", "xUnit1045:Avoid using TheoryData type arguments that might not be serializable")]
+    public void ConstructorScenarios(Values4TestScenario s)
     {
-        var values = new Values<int, string, DayOfWeek, Person>(1);
+        var values = s.ConstructorCall();
 
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.Equal([1], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_Value2Passed_OnlyValue2HasValue()
-    {
-        var values = new Values<int, string, DayOfWeek, Person>("Foo");
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal(["Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_Value3Passed_OnlyValue3HasValue()
-    {
-        var values = new Values<int, string, DayOfWeek, Person>(DayOfWeek.Friday);
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.True(values.HasValue3);
-        Assert.Single(values.Value3);
-        Assert.Equal([DayOfWeek.Friday], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_Value4Passed_OnlyValue4HasValue()
-    {
-        var values = new Values<int, string, DayOfWeek, Person>(new Person());
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.False(values.HasValue3);
-        Assert.Empty(values.Value3);
-        Assert.True(values.HasValue4);
-        Assert.Single(values.Value4);
-        var item = Assert.Single(values.Cast<object>().ToList());
-        Assert.IsType<Person>(item);
-    }
-
-    [Fact]
-    public void Constructor_Items_HasAllItems()
-    {
-        var person = new Person();
-        var values = new Values<int, string, DayOfWeek, Person>(1, "Foo", DayOfWeek.Friday, person);
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.True(values.HasValue3);
-        Assert.Single(values.Value3);
-        Assert.True(values.HasValue4);
-        Assert.Single(values.Value4);
-        Assert.Equal(
-            [1, "Foo", DayOfWeek.Friday, person],
-            values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void Constructor_StringItems_NullOrWhitespaceDoesntHaveValue()
-    {
-        object[] nullOrWhitespaceValues =
-        [
-            string.Empty,
-            null!,
-            "\u2028 \u2029 \u0009 \u000A \u000B \u000C \u000D \u0085"
-        ];
-        var values = new Values<int, string, DayOfWeek, Person>(nullOrWhitespaceValues);
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
-        Assert.False(values.HasValue3);
-        Assert.Empty(values.Value3);
-        Assert.False(values.HasValue4);
-        Assert.Empty(values.Value4);
-    }
-
-    [Fact]
-    public void Constructor_NullList_ThrowsArgumentNullException() =>
-        Assert.Throws<ArgumentNullException>(() => new Values<int, string, DayOfWeek, Person>((List<object>)null!));
-
-    [Fact]
-    public void CollectionExpression_Value1Passed_OnlyValue1HasValue()
-    {
-        Values<int, string, DayOfWeek, Person> values = [1];
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.Equal([1], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_Value2Passed_OnlyValue2HasValue()
-    {
-        Values<int, string, DayOfWeek, Person> values = ["Foo"];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.Equal(["Foo"], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_Value3Passed_OnlyValue3HasValue()
-    {
-        Values<int, string, DayOfWeek, Person> values = [DayOfWeek.Friday];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.True(values.HasValue3);
-        Assert.Single(values.Value3);
-        Assert.Equal([DayOfWeek.Friday], values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_Value4Passed_OnlyValue4HasValue()
-    {
-        Values<int, string, DayOfWeek, Person> values = [new Person()];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2);
-        AssertEx.Empty(values.Value2);
-        Assert.False(values.HasValue3);
-        Assert.Empty(values.Value3);
-        Assert.True(values.HasValue4);
-        Assert.Single(values.Value4);
-        var item = Assert.Single(values.Cast<object>().ToList());
-        Assert.IsType<Person>(item);
-    }
-
-    [Fact]
-    public void CollectionExpression_Items_HasAllItems()
-    {
-        var person = new Person();
-        Values<int, string, DayOfWeek, Person> values = [1, "Foo", DayOfWeek.Friday, person];
-
-        Assert.True(values.HasValue1);
-        Assert.Single(values.Value1);
-        Assert.True(values.HasValue2);
-        Assert.Single(values.Value2);
-        Assert.True(values.HasValue3);
-        Assert.Single(values.Value3);
-        Assert.True(values.HasValue4);
-        Assert.Single(values.Value4);
-        Assert.Equal(
-            [1, "Foo", DayOfWeek.Friday, person],
-            values.Cast<object>().ToList());
-    }
-
-    [Fact]
-    public void CollectionExpression_StringItems_NullOrWhitespaceDoesntHaveValue()
-    {
-        Values<int, string, DayOfWeek, Person> values =
-        [
-            string.Empty,
-            null!,
-            "\u2028 \u2029 \u0009 \u000A \u000B \u000C \u000D \u0085"
-        ];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
-        Assert.False(values.HasValue3);
-        Assert.Empty(values.Value3);
-        Assert.False(values.HasValue4);
-        Assert.Empty(values.Value4);
-    }
-
-    [Fact]
-    public void CollectionExpression_NoItems_HasNoItems()
-    {
-        Values<int, string, DayOfWeek, Person> values = [];
-
-        Assert.False(values.HasValue1);
-        Assert.Empty(values.Value1);
-        Assert.False(values.HasValue2, $"{nameof(values.HasValue2)}: Expected: False, Actual: True");
-        AssertEx.Empty(values.Value2);
-        Assert.False(values.HasValue3);
-        Assert.Empty(values.Value3);
-        Assert.False(values.HasValue4);
-        Assert.Empty(values.Value4);
+        Assert.Equal(s.ExpectedHasValue1, values.HasValue1);
+        Assert.Equal(s.ExpectedHasValue2, values.HasValue2);
+        Assert.Equal(s.ExpectedHasValue3, values.HasValue3);
+        Assert.Equal(s.ExpectedHasValue4, values.HasValue4);
+        Assert.Equal(s.ExpectedCountValue1, values.Value1.Count);
+        Assert.Equal(s.ExpectedCountValue2, values.Value2.Count);
+        Assert.Equal(s.ExpectedCountValue3, values.Value3.Count);
+        Assert.Equal(s.ExpectedCountValue4, values.Value4.Count);
+        Assert.Equal(s.ExpectedValues, values.Cast<object>().ToList());
     }
 
     [Theory]
@@ -533,51 +345,51 @@ public class Values4Test
 
     [Fact]
     public void Equals_MixedTypes_Value1EqualValue2EqualValue3EqualValue4NotEqual_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person { Name = "Schema" } })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person { Name = "Schema" })));
 
     [Fact]
     public void Equals_MixedTypes_Value1EqualValue2EqualValue3NotEqualValue4Equal_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Wednesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Wednesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_Value1EqualValue2NotEqualValue3EqualValue4Equal_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Bar", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Bar", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_Value1NotEqualValue2EqualValue3EqualValue4Equal_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 1, "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(1, "Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue4_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue3_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue2_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_ThisMissingValue1_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>("Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue4_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday)));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue3_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, "Foo", new Person())));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue2_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { 0, DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>(0, DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void Equals_MixedTypes_OtherMissingValue1_ReturnsFalse() =>
-        Assert.False(new Values<int, string, DayOfWeek, Person>(new object[] { 0, "Foo", DayOfWeek.Tuesday, new Person() }).Equals(new Values<int, string, DayOfWeek, Person>(new object[] { "Foo", DayOfWeek.Tuesday, new Person() })));
+        Assert.False(new Values<int, string, DayOfWeek, Person>(0, "Foo", DayOfWeek.Tuesday, new Person()).Equals(new Values<int, string, DayOfWeek, Person>("Foo", DayOfWeek.Tuesday, new Person())));
 
     [Fact]
     public void GetHashCode_Value1Passed_ReturnsMatchingHashCode() =>
