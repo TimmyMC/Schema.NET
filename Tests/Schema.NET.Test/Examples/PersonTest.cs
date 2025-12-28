@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 // https://developers.google.com/search/docs/data-types/social-profile-links
@@ -10,13 +9,13 @@ public class PersonTest
     private readonly Person person = new()
     {
         Name = "Name", // Required
-        SameAs = new List<Uri?>() // Required
-            {
-                new Uri("https://www.facebook.com/your-profile"),
-                new Uri("https://instagram.com/yourProfile"),
-                new Uri("https://www.linkedin.com/in/yourprofile"),
-                new Uri("https://plus.google.com/your_profile"),
-            },
+        SameAs = // Required
+        [
+            new Uri("https://www.facebook.com/your-profile"),
+            new Uri("https://instagram.com/yourProfile"),
+            new Uri("https://www.linkedin.com/in/yourprofile"),
+            new Uri("https://plus.google.com/your_profile"),
+        ],
         Url = new Uri("https://example.com"), // Required
     };
 

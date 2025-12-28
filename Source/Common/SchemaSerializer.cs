@@ -1,7 +1,6 @@
 namespace Schema.NET;
 
 using System;
-using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -71,14 +70,55 @@ public static class SchemaSerializer
 
     private static string RemoveAllButFirstContext(string json)
     {
-        if (json.Contains(ContextPropertyJson, StringComparison.Ordinal))
+        if (!HasDuplicateContexts(json.AsSpan(), out var secondContextIndex))
         {
-            var stringBuilder = new StringBuilder(json);
-            var startIndex = ContextPropertyJson.Length + 1; // We add the one to represent the opening curly brace.
-            stringBuilder.Replace(ContextPropertyJson, string.Empty, startIndex, stringBuilder.Length - startIndex);
-            return stringBuilder.ToString();
+            return json;
         }
 
-        return json;
+        var duplicateOccurrences = json.AsSpan()[secondContextIndex..].Count(ContextPropertyJson);
+        var resultLength = json.Length - (duplicateOccurrences * ContextPropertyJson.Length);
+
+        return string.Create(resultLength, (json, secondContextStart: secondContextIndex), BuildResultString);
+    }
+
+    private static bool HasDuplicateContexts(ReadOnlySpan<char> json, out int secondContextIndex)
+    {
+        var firstContextIndex = json.IndexOf(ContextPropertyJson, StringComparison.Ordinal);
+
+        if (firstContextIndex < 0)
+        {
+            secondContextIndex = 0;
+            return false;
+        }
+
+        secondContextIndex = json[(firstContextIndex + ContextPropertyJson.Length)..].IndexOf(ContextPropertyJson, StringComparison.Ordinal);
+
+        return secondContextIndex >= 0;
+    }
+
+    private static void BuildResultString(Span<char> destination, (string json, int prefixLength) state)
+    {
+        var (json, prefixLength) = state;
+
+        json.AsSpan(0, prefixLength).CopyTo(destination);
+
+        var source = json.AsSpan(prefixLength);
+        var writePosition = prefixLength;
+        var readPosition = 0;
+
+        while (readPosition < source.Length)
+        {
+            var nextContextIndex = source[readPosition..].IndexOf(ContextPropertyJson);
+
+            if (nextContextIndex < 0)
+            {
+                source[readPosition..].CopyTo(destination[writePosition..]);
+                break;
+            }
+
+            source.Slice(readPosition, nextContextIndex).CopyTo(destination[writePosition..]);
+            writePosition += nextContextIndex;
+            readPosition += nextContextIndex + ContextPropertyJson.Length;
+        }
     }
 }

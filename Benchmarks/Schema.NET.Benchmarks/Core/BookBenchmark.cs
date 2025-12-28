@@ -1,7 +1,6 @@
 namespace Schema.NET.Benchmarks.Core;
 
 using System;
-using System.Collections.Generic;
 
 public class BookBenchmark : SchemaBenchmarkBase
 {
@@ -15,66 +14,66 @@ public class BookBenchmark : SchemaBenchmarkBase
                 Name = "J.D. Salinger",
             },
             Url = new Uri("https://www.barnesandnoble.com/store/info/offer/JDSalinger"),
-            WorkExample = new List<ICreativeWork?>
-            {
-                    new Book
+            WorkExample =
+            [
+                new Book
+                {
+                    Isbn = "031676948",
+                    BookEdition = "2nd Edition",
+                    BookFormat = BookFormatType.Hardcover,
+                    PotentialAction = new ReadAction
                     {
-                        Isbn = "031676948",
-                        BookEdition = "2nd Edition",
-                        BookFormat = BookFormatType.Hardcover,
-                        PotentialAction = new ReadAction
+                        Target = new EntryPoint
                         {
-                            Target = new EntryPoint
+                            UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true",
+                            ActionPlatform =
+                            [
+                                new Uri("https://schema.org/DesktopWebPlatform"),
+                                new Uri("https://schema.org/IOSPlatform"),
+                                new Uri("https://schema.org/AndroidPlatform"),
+                            ],
+                        },
+                        ExpectsAcceptanceOf = new Offer
+                        {
+                            Price = 6.99M,
+                            PriceCurrency = "USD",
+                            EligibleRegion = new Country
                             {
-                                UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true",
-                                ActionPlatform = new List<Uri?>
-                                {
-                                    new Uri("https://schema.org/DesktopWebPlatform"),
-                                    new Uri("https://schema.org/IOSPlatform"),
-                                    new Uri("https://schema.org/AndroidPlatform"),
-                                },
+                                Name = "US",
                             },
-                            ExpectsAcceptanceOf = new Offer
-                            {
-                                Price = 6.99M,
-                                PriceCurrency = "USD",
-                                EligibleRegion = new Country
-                                {
-                                    Name = "US",
-                                },
-                                Availability = ItemAvailability.InStock,
-                            },
+                            Availability = ItemAvailability.InStock,
                         },
                     },
-                    new Book
+                },
+                new Book
+                {
+                    Isbn = "031676947",
+                    BookEdition = "1st Edition",
+                    BookFormat = BookFormatType.EBook,
+                    PotentialAction = new ReadAction
                     {
-                        Isbn = "031676947",
-                        BookEdition = "1st Edition",
-                        BookFormat = BookFormatType.EBook,
-                        PotentialAction = new ReadAction
+                        Target = new EntryPoint
                         {
-                            Target = new EntryPoint
+                            UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/031676947?purchase=true",
+                            ActionPlatform =
+                            [
+                                new Uri("https://schema.org/DesktopWebPlatform"),
+                                new Uri("https://schema.org/IOSPlatform"),
+                                new Uri("https://schema.org/AndroidPlatform"),
+                            ],
+                        },
+                        ExpectsAcceptanceOf = new Offer
+                        {
+                            Price = 1.99M,
+                            PriceCurrency = "USD",
+                            EligibleRegion = new Country
                             {
-                                UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/031676947?purchase=true",
-                                ActionPlatform = new List<Uri?>
-                                {
-                                    new Uri("https://schema.org/DesktopWebPlatform"),
-                                    new Uri("https://schema.org/IOSPlatform"),
-                                    new Uri("https://schema.org/AndroidPlatform"),
-                                },
+                                Name = "UK",
                             },
-                            ExpectsAcceptanceOf = new Offer
-                            {
-                                Price = 1.99M,
-                                PriceCurrency = "USD",
-                                EligibleRegion = new Country
-                                {
-                                    Name = "UK",
-                                },
-                                Availability = ItemAvailability.InStock,
-                            },
+                            Availability = ItemAvailability.InStock,
                         },
                     },
-            },
+                },
+            ],
         };
 }

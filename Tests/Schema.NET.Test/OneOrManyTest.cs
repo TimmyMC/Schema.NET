@@ -57,6 +57,39 @@ public class OneOrManyTest
         Assert.Throws<ArgumentNullException>(() => new OneOrMany<int>((List<int>)null!));
 
     [Fact]
+    public void CollectionBuilder_OneItem_HasOneItem()
+    {
+        OneOrMany<int> oneOrMany = [1];
+        Assert.True(oneOrMany.HasOne);
+        Assert.False(oneOrMany.HasMany);
+    }
+
+    [Fact]
+    public void CollectionBuilder_NoItems_HasNoItems()
+    {
+        OneOrMany<int> oneOrMany = [];
+        Assert.Equal(oneOrMany, default);
+        Assert.False(oneOrMany.HasOne);
+        Assert.False(oneOrMany.HasMany);
+    }
+
+    [Fact]
+    public void CollectionBuilder_OneNullItem_HasNoItems()
+    {
+        OneOrMany<int?> oneOrMany = [null];
+        Assert.False(oneOrMany.HasOne);
+        Assert.False(oneOrMany.HasMany);
+    }
+
+    [Fact]
+    public void CollectionBuilder_MultipleItems_HasManyItems()
+    {
+        OneOrMany<int> oneOrMany = [1, 2, 3];
+        Assert.False(oneOrMany.HasOne);
+        Assert.True(oneOrMany.HasMany);
+    }
+
+    [Fact]
     public void Count_DefaultStructConstructor_ReturnsZero() => Assert.Empty(default(OneOrMany<int>));
 
     [Fact]

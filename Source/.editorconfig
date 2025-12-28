@@ -6,3 +6,6 @@
 # CA1716: Identifiers should not match keywords
 # Justification: Ignore Parameters to avoid breaking changes
 dotnet_code_quality.CA1716.analyzed_symbol_kinds = Namespace, NamedType, Method, Property, Event
+
+# CA1710: Identifiers should have correct suffix
+dotnet_code_quality.CA1710.additional_required_suffixes = IEnumerable->{}|IReadOnlyCollection->{}|IValues->Values

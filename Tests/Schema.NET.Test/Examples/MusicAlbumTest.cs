@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 public class MusicAlbumTest
@@ -10,17 +9,17 @@ public class MusicAlbumTest
     {
         Name = "Hail to the Thief", // Required
         Identifier = "1oW3v5Har9mvXnGk0x4fHm", // Recommended
-        Image = new List<IImageObject?> // Recommended
+        Image = // Recommended
+        [
+            new ImageObject() // Recommended
             {
-                new ImageObject() // Recommended
-                {
-                    ContentUrl = new Uri("https://i.scdn.co/image/5ded47fd3d05325dd0faaf4619481e1f25a21ec7"), // Required
-                },
-                new ImageObject() // Recommended
-                {
-                    ContentUrl = new Uri("https://is4-ssl.mzstatic.com/image/thumb/Music69/v4/cc/1c/90/cc1c9039-c3ba-4256-e251-1687df46cb0a/cover.jpg/1400x1400bb.jpeg"), // Required
-                },
+                ContentUrl = new Uri("https://i.scdn.co/image/5ded47fd3d05325dd0faaf4619481e1f25a21ec7"), // Required
             },
+            new ImageObject() // Recommended
+            {
+                ContentUrl = new Uri("https://is4-ssl.mzstatic.com/image/thumb/Music69/v4/cc/1c/90/cc1c9039-c3ba-4256-e251-1687df46cb0a/cover.jpg/1400x1400bb.jpeg"), // Required
+            },
+        ],
         SameAs = new Uri("https://music.apple.com/us/album/hail-to-the-thief/1097863576"), // Recommended
         Url = new Uri("https://open.spotify.com/album/1oW3v5Har9mvXnGk0x4fHm"), // Recommended
         AggregateRating = new AggregateRating() // Recommended

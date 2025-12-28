@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 public class MusicVenueTest
@@ -15,11 +14,11 @@ public class MusicVenueTest
         {
             ContentUrl = new Uri("https://s1.ticketm.net/dam/v/e6b/380fa861-3f46-44a9-a514-21553f7fbe6b_379601_SOURCE.jpg"), // Required
         },
-        SameAs = new List<Uri?>
-            {
-                new Uri("https://www.twitter.com/dolbytheatre"), // Recommended
-                new Uri("https://www.dolbytheatre.com"), // Recommended
-            },
+        SameAs =
+        [
+            new Uri("https://www.twitter.com/dolbytheatre"), // Recommended
+            new Uri("https://www.dolbytheatre.com"), // Recommended
+        ],
         Url = new Uri("https://foursquare.com/dolbytheatre"), // Recommended
         Address = new PostalAddress() // Recommended
         {

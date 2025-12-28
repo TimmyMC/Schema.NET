@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using Xunit;
 
 // https://developers.google.com/search/docs/guides/mark-up-listings
@@ -32,16 +31,16 @@ public class RecipeTest
             Calories = "250 cal",
             FatContent = "12 g",
         },
-        RecipeIngredient = new List<string?>
-        {
-                "Thinly-sliced apples:6 cups",
-                "White sugar:3/4 cup",
-            },
-        RecipeInstructions = new List<ICreativeWork?>
-        {
-                new HowToStep { Text = "1. Cut and peel apples..." },
-                new HowToStep { Text = "2. Put in pie shell..." },
-            },
+        RecipeIngredient =
+        [
+            "Thinly-sliced apples:6 cups",
+            "White sugar:3/4 cup"
+        ],
+        RecipeInstructions =
+        [
+            new HowToStep { Text = "1. Cut and peel apples..." },
+            new HowToStep { Text = "2. Put in pie shell..." },
+        ],
     };
 
     private readonly string json = /*lang=json,strict*/

@@ -1,7 +1,6 @@
 namespace Schema.NET.Test.Examples;
 
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using Xunit;
 
@@ -29,19 +28,19 @@ public class MusicEventTest
                 PriceCurrency = "USD", // Recommended
             },
         },
-        Performer = new List<IOrganization?>() // Recommended
+        Performer = // Recommended
+        [
+            new MusicGroup() // Recommended
             {
-                new MusicGroup() // Recommended
-                {
-                    Name = "Arash", // Required
-                    Identifier = "K8vZ917ukD7", // Recommended
-                },
-                new MusicGroup() // Recommended
-                {
-                    Name = "Tohi", // Required
-                    Identifier = "K8vZ917bA70", // Recommended
-                },
+                Name = "Arash", // Required
+                Identifier = "K8vZ917ukD7", // Recommended
             },
+            new MusicGroup() // Recommended
+            {
+                Name = "Tohi", // Required
+                Identifier = "K8vZ917bA70", // Recommended
+            },
+        ],
         StartDate = DateTimeOffset.Parse("2019-06-23T03:00:00-07:00", CultureInfo.InvariantCulture), // Recommended
     };
 
