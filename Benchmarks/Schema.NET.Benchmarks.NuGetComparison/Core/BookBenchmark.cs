@@ -1,9 +1,12 @@
 namespace Schema.NET.Benchmarks.Core;
 
-public class BookBenchmark : SchemaBenchmarkBase
+using System;
+using Book = NET.Book;
+
+public static class BookBenchmark
 {
-    public override Thing InitialiseThing() =>
-        new Book
+    public static readonly Thing BookThing =
+        new NET.Book
         {
             Id = new Uri("https://example.com/book/1"),
             Name = "The Catcher in the Rye",
@@ -12,9 +15,8 @@ public class BookBenchmark : SchemaBenchmarkBase
                 Name = "J.D. Salinger",
             },
             Url = new Uri("https://www.barnesandnoble.com/store/info/offer/JDSalinger"),
-            WorkExample =
-            [
-                new Book
+            WorkExample = new OneOrMany<ICreativeWork>(
+                new NET.Book
                 {
                     Isbn = "031676948",
                     BookEdition = "2nd Edition",
@@ -24,12 +26,10 @@ public class BookBenchmark : SchemaBenchmarkBase
                         Target = new EntryPoint
                         {
                             UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/0316769487?purchase=true",
-                            ActionPlatform =
-                            [
+                            ActionPlatform = new Values<string, Uri>(
                                 new Uri("https://schema.org/DesktopWebPlatform"),
                                 new Uri("https://schema.org/IOSPlatform"),
-                                new Uri("https://schema.org/AndroidPlatform"),
-                            ],
+                                new Uri("https://schema.org/AndroidPlatform")),
                         },
                         ExpectsAcceptanceOf = new Offer
                         {
@@ -53,12 +53,10 @@ public class BookBenchmark : SchemaBenchmarkBase
                         Target = new EntryPoint
                         {
                             UrlTemplate = "https://www.barnesandnoble.com/store/info/offer/031676947?purchase=true",
-                            ActionPlatform =
-                            [
+                            ActionPlatform = new Values<string, Uri>(
                                 new Uri("https://schema.org/DesktopWebPlatform"),
                                 new Uri("https://schema.org/IOSPlatform"),
-                                new Uri("https://schema.org/AndroidPlatform"),
-                            ],
+                                new Uri("https://schema.org/AndroidPlatform"))
                         },
                         ExpectsAcceptanceOf = new Offer
                         {
@@ -71,7 +69,6 @@ public class BookBenchmark : SchemaBenchmarkBase
                             Availability = ItemAvailability.InStock,
                         },
                     },
-                },
-            ],
+                }),
         };
 }

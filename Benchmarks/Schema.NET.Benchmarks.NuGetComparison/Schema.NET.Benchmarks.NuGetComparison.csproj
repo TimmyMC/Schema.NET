@@ -6,13 +6,16 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
   </PropertyGroup>
 
-  <ItemGroup Label="Project References">
-    <ProjectReference Include="..\..\Source\Schema.NET\Schema.NET.csproj" />
+  <ItemGroup Condition="'$(ForkVersion)' == ''">
+    <PackageReference Include="Schema.NET" Version="13.0.0"/>
   </ItemGroup>
 
-  <ItemGroup Label="Package References">
+  <ItemGroup Condition="'$(ForkVersion)' != ''">
+    <PackageReference Include="SchemaDotNet" Version="$(ForkVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.15.8" />
-    <PackageReference Include="Microsoft.VisualStudio.DiagnosticsHub.BenchmarkDotNetDiagnosers" Version="18.3.36812.1" />
   </ItemGroup>
 
 </Project>

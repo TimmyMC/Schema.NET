@@ -1,7 +1,5 @@
 namespace Schema.NET.Benchmarks.Core;
 
-using System;
-
 public class WebsiteBenchmark : SchemaBenchmarkBase
 {
     public override Thing InitialiseThing() =>
