@@ -3,6 +3,7 @@ namespace Schema.NET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -15,6 +16,8 @@ using System.Runtime.CompilerServices;
 /// <typeparam name="T4">The fourth type the values can take.</typeparam>
 /// <typeparam name="T5">The fifth type the values can take.</typeparam>
 /// <typeparam name="T6">The sixth type the values can take.</typeparam>
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
+[DebuggerTypeProxy(typeof(IValuesDebugView))]
 [CollectionBuilder(typeof(ValuesBuilder), nameof(ValuesBuilder.Create))]
 public readonly struct Values<T1, T2, T3, T4, T5, T6> : IReadOnlyCollection<object?>, IValues, IEquatable<Values<T1, T2, T3, T4, T5, T6>>
 {
@@ -775,6 +778,12 @@ public readonly struct Values<T1, T2, T3, T4, T5, T6> : IReadOnlyCollection<obje
     /// </returns>
     public override int GetHashCode() =>
         HashCode.Of(this.Value1).And(this.Value2).And(this.Value3).And(this.Value4).And(this.Value5).And(this.Value6);
+
+    /// <summary>
+    /// Gets the string to display in the debugger watches window for this instance.
+    /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay => $"Length = {this.Count}";
 }
 
 public static partial class ValuesBuilder

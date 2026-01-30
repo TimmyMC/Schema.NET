@@ -3,6 +3,7 @@ namespace Schema.NET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -11,6 +12,8 @@ using System.Runtime.CompilerServices;
 /// </summary>
 /// <typeparam name="T1">The first type the values can take.</typeparam>
 /// <typeparam name="T2">The second type the values can take.</typeparam>
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
+[DebuggerTypeProxy(typeof(IValuesDebugView))]
 [CollectionBuilder(typeof(ValuesBuilder), nameof(ValuesBuilder.Create))]
 public readonly struct Values<T1, T2> : IReadOnlyCollection<object?>, IValues, IEquatable<Values<T1, T2>>
 {
@@ -334,6 +337,12 @@ public readonly struct Values<T1, T2> : IReadOnlyCollection<object?>, IValues, I
     /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
     /// </returns>
     public override int GetHashCode() => HashCode.Of(this.Value1).And(this.Value2);
+
+    /// <summary>
+    /// Gets the string to display in the debugger watches window for this instance.
+    /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay => $"Length = {this.Count}";
 }
 
 /// <summary>
