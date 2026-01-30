@@ -110,18 +110,21 @@ public readonly struct OneOrMany<T> : IReadOnlyCollection<T>, IValues, IEquatabl
     /// <summary>
     /// Gets the number of elements contained in the <see cref="OneOrMany{T}"/>.
     /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public int Count => this.collection?.Length ?? 0;
 
     /// <summary>
     /// Gets a value indicating whether this instance has a single item value.
     /// </summary>
     /// <value><c>true</c> if this instance has a single item value; otherwise, <c>false</c>.</value>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasOne { get; }
 
     /// <summary>
     /// Gets a value indicating whether this instance has more than one value.
     /// </summary>
     /// <value><c>true</c> if this instance has more than one value; otherwise, <c>false</c>.</value>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasMany => this.collection?.Length > 1;
 
     /// <summary>
