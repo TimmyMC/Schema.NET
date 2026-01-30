@@ -2,6 +2,7 @@
 ### Changes:
 - Add targets for .NET 8 - 10
 - Add support for [collection expressions](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions)
+- Added debugging attributes [#48](https://github.com/TimmyMC/Schema.NET/pull/48)
 - Performance improvements
 ### Why the fork?
 > I created this fork for to use in a large webshop, I initially wanted the package to target .net 8.<br/>
