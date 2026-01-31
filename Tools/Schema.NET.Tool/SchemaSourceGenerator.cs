@@ -3,6 +3,7 @@ namespace Schema.NET.Tool;
 using System;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Reflection;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Schema.NET.Tool.CustomOverrides;
@@ -14,6 +15,9 @@ using Schema.NET.Tool.Services;
 public class SchemaSourceGenerator : IIncrementalGenerator
 {
     private const string SchemaDataName = "schemaorg-all-https.jsonld";
+    private static readonly Assembly Assembly = Assembly.GetExecutingAssembly();
+    private static readonly string ToolName = Assembly.GetCustomAttribute<AssemblyProductAttribute>()?.Product ?? throw new InvalidOperationException("Missing package metadata: ProductName");
+    private static readonly string Version = Assembly.GetName().Version?.ToString() ?? throw new InvalidOperationException("Missing package metadata: Version");
 
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
@@ -99,6 +103,7 @@ public class SchemaSourceGenerator : IIncrementalGenerator
             /// <summary>
             /// {{SourceUtility.RenderDoc(4, schemaClass.Description)}}
             /// </summary>
+            {{RenderGeneratedCodeAttribute()}}
             public{{classModifiers}} partial class {{schemaClass.Name}} :{{classImplements}} I{{schemaClass.Name}}, IEquatable<{{schemaClass.Name}}>
             {
                 /// <summary>
@@ -146,6 +151,7 @@ public class SchemaSourceGenerator : IIncrementalGenerator
             /// <summary>
             /// {{SourceUtility.RenderDoc(4, schemaClass.Description)}}
             /// </summary>
+            {{RenderGeneratedCodeAttribute()}}
             public partial interface I{{schemaClass.Name}}{{interfaceImplements}}
             {
             {{SourceUtility.RenderItems(!schemaClass.IsCombined, schemaClass.DeclaredProperties, RenderInterfaceProperty, 4, SourceDelimeter.NewLineSpace)}}
@@ -171,6 +177,8 @@ public class SchemaSourceGenerator : IIncrementalGenerator
         [JsonConverter(typeof({{property.JsonConverterType}}))]
         public{{GetAccessModifier(property)}} {{property.PropertyTypeString}} {{property.Name}} { get; set; }
         """;
+
+    private static string RenderGeneratedCodeAttribute() => $"""[System.CodeDom.Compiler.GeneratedCodeAttribute("{ToolName}", "{Version}")]""";
 
     private static string RenderClassTrySetValue(GeneratorSchemaProperty[] allProperties, int indent)
     {
