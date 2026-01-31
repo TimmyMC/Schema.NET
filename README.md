@@ -1,7 +1,8 @@
 # (Temporary?) Fork of [Schema.NET](https://github.com/RehanSaeed/Schema.NET)
 ### Changes:
 - Add targets for .NET 8 - 10
-- Add support for [collection expressions](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions)
+- Removed targets for EOL .NET versions and .Net Framework
+- Add support for [collection expressions](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/collection-expressions) [#36](https://github.com/TimmyMC/Schema.NET/pull/36)
 - Added debugging attributes [#48](https://github.com/TimmyMC/Schema.NET/pull/48)
 - Performance improvements
 ### Why the fork?
