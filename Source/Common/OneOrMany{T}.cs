@@ -3,6 +3,7 @@ namespace Schema.NET;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,11 +13,13 @@ using System.Runtime.CompilerServices;
 /// </summary>
 /// <typeparam name="T">The type of the values.</typeparam>
 /// <seealso cref="IReadOnlyCollection{T}" />
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 [CollectionBuilder(typeof(OneOrManyBuilder), nameof(OneOrManyBuilder.Create))]
 #pragma warning disable CA1710 // Identifiers should have correct suffix.
 public readonly struct OneOrMany<T> : IReadOnlyCollection<T>, IValues, IEquatable<OneOrMany<T>>
 #pragma warning restore CA1710 // Identifiers should have correct suffix.
 {
+    [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
     private readonly T[]? collection;
 
     /// <summary>
@@ -107,18 +110,21 @@ public readonly struct OneOrMany<T> : IReadOnlyCollection<T>, IValues, IEquatabl
     /// <summary>
     /// Gets the number of elements contained in the <see cref="OneOrMany{T}"/>.
     /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public int Count => this.collection?.Length ?? 0;
 
     /// <summary>
     /// Gets a value indicating whether this instance has a single item value.
     /// </summary>
     /// <value><c>true</c> if this instance has a single item value; otherwise, <c>false</c>.</value>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasOne { get; }
 
     /// <summary>
     /// Gets a value indicating whether this instance has more than one value.
     /// </summary>
     /// <value><c>true</c> if this instance has more than one value; otherwise, <c>false</c>.</value>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public bool HasMany => this.collection?.Length > 1;
 
     /// <summary>
@@ -286,6 +292,12 @@ public readonly struct OneOrMany<T> : IReadOnlyCollection<T>, IValues, IEquatabl
     /// </summary>
     /// <returns>A <see cref="ReadOnlySpan{T}"/> wrapping the current items.</returns>
     public ReadOnlySpan<T> AsSpan() => this.collection.AsSpan();
+
+    /// <summary>
+    /// Gets the string to display in the debugger watches window for this instance.
+    /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay => $"Length = {this.Count}";
 }
 
 /// <summary>
