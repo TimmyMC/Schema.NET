@@ -108,6 +108,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{AF228B
 		Source\Common\Values{T1,T2,T3}.cs = Source\Common\Values{T1,T2,T3}.cs
 		Source\Common\Values{T1,T2}.cs = Source\Common\Values{T1,T2}.cs
 		Source\Common\IValuesDebugView.cs = Source\Common\IValuesDebugView.cs
+		Source\Common\JsonConstants.cs = Source\Common\JsonConstants.cs
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Schema.NET.Updater", "Tools\Schema.NET.Updater\Schema.NET.Updater.csproj", "{8923F9E2-4BB8-45F9-9A85-863F381B46EE}"

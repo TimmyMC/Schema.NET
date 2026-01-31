@@ -19,7 +19,7 @@ public static class EnumHelper
     /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
     public static bool TryParse(
         Type enumType,
-        [NotNullWhen(true)] string? value,
+        ReadOnlySpan<char> value,
         out object? result) => Enum.TryParse(enumType, value, out result);
 
     /// <summary>
@@ -36,14 +36,14 @@ public static class EnumHelper
     {
         ArgumentNullException.ThrowIfNull(enumType);
 
-        string? enumString;
+        ReadOnlySpan<char> enumString;
         if (value is not null && value.Length > Constants.HttpSchemaOrgUrl.Length && value.StartsWith(Constants.HttpSchemaOrgUrl, StringComparison.OrdinalIgnoreCase))
         {
-            enumString = value[(Constants.HttpSchemaOrgUrl.Length + 1)..];
+            enumString = value.AsSpan()[(Constants.HttpSchemaOrgUrl.Length + 1)..];
         }
         else if (value is not null && value.Length > Constants.HttpsSchemaOrgUrl.Length && value.StartsWith(Constants.HttpsSchemaOrgUrl, StringComparison.OrdinalIgnoreCase))
         {
-            enumString = value[(Constants.HttpsSchemaOrgUrl.Length + 1)..];
+            enumString = value.AsSpan()[(Constants.HttpsSchemaOrgUrl.Length + 1)..];
         }
         else
         {

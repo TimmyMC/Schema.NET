@@ -130,16 +130,15 @@ public class ValuesJsonConverter : JsonConverter<IValues>
             case null:
                 writer.WriteNullValue();
                 break;
-            case TimeSpan timeSpan:
-                // System.Text.Json won't support timespans as time of day. See https://github.com/dotnet/runtime/issues/29932
-                writer.WriteStringValue(timeSpan.ToString("c", CultureInfo.InvariantCulture));
-                break;
             case decimal decimalNumber:
-                // TODO: Potential unnecessary allocation - may be able to write to a stackalloc span.
-                writer.WriteRawValue(decimalNumber.ToString("G0", CultureInfo.InvariantCulture));
+                Span<char> decimalSpan =  stackalloc char[JsonConstants.MaximumFormatDecimalLength];
+                decimalNumber.TryFormat(decimalSpan, out var decimalCharsWritten, "G0", NumberFormatInfo.InvariantInfo);
+                writer.WriteRawValue(decimalSpan[..decimalCharsWritten]);
                 break;
             case double doubleNumber:
-                writer.WriteRawValue(doubleNumber.ToString("G0", CultureInfo.InvariantCulture));
+                Span<char> doubleSpan =  stackalloc char[JsonConstants.MaximumFormatDoubleLength];
+                doubleNumber.TryFormat(doubleSpan, out var doubleCharsWritten, "G0", NumberFormatInfo.InvariantInfo);
+                writer.WriteRawValue(doubleSpan[..doubleCharsWritten]);
                 break;
             default:
                 JsonSerializer.Serialize(writer, value, value.GetType(), options);
@@ -158,9 +157,8 @@ public class ValuesJsonConverter : JsonConverter<IValues>
                 typeElement.ValueKind == JsonValueKind.String &&
                 TryGetConcreteType(typeElement.GetString()!, out var explicitType))
             {
-                for (var i = 0; i < targetTypes.Length; i++)
+                foreach (var targetType in targetTypes)
                 {
-                    var targetType = targetTypes[i];
                     if (targetType.IsAssignableFrom(explicitType))
                     {
                         return objectRoot.Deserialize(explicitType, options);
